@@ -1288,7 +1288,7 @@
 
     .line 617
     .local v0, cmccConnectType:I
-    invoke-direct {p0, v4, v0}, Lcom/android/server/TwWifiPolicy;->saveCmccConfig(ZI)V
+    #invoke-direct {p0, v4, v0}, Lcom/android/server/TwWifiPolicy;->saveCmccConfig(ZI)V
 
     .line 619
     iget-object v2, p0, Lcom/android/server/TwWifiPolicy;->mContext:Landroid/content/Context;
@@ -1307,7 +1307,7 @@
     .local v1, cmccEduconnectType:I
     const/4 v2, 0x0
 
-    invoke-direct {p0, v2, v1}, Lcom/android/server/TwWifiPolicy;->saveCmccConfig(ZI)V
+    #invoke-direct {p0, v2, v1}, Lcom/android/server/TwWifiPolicy;->saveCmccConfig(ZI)V
 
     .line 623
     return-void
