@@ -66,6 +66,7 @@ fullota : ${DST_JAR_OUT} sign ${APKS_NOT_SIGN}
 	echo "ro.build.channel=${FROM_CHANNEL}" >> new-update/system/build.prop
 
 	@echo "${PORT_BUILD}/ColorSystem/*"
+	rm -rf new-update/system/media/audio new-update/system/media/video new-update/system/media/*.zip new-update/system/media/*.mp3 new-update/system/vendor/pcsuite.iso
 	${PORT_TOOLS}/copy_fold.sh ${PORT_BUILD}/ColorSystem new-update/system
 	rm -rf new-update/system/app/*
 	${PORT_TOOLS}/resign.sh dir new-update/system/framework
@@ -76,6 +77,11 @@ fullota : ${DST_JAR_OUT} sign ${APKS_NOT_SIGN}
 
 #we will use $(CUSTOM_UPDATE) to cover, so you need put your change file or some apk can't be deleted
 	${PORT_TOOLS}/copy_fold.sh ${CUSTOM_UPDATE} new-update/
+
+	mv new-update/system/app/ColorOSforum.apk new-update/data/app
+	mv new-update/system/app/IFlySpeechService.apk new-update/data/app
+#	mv new-update/system/app/OppoSpeechAssist.apk new-update/data/app
+	rm new-update/system/app/OppoLockScreenGlassBoard.apk
 
 #	${PORT_TOOLS}/resign.sh dir new-update
 #	${PORT_TOOLS}/oppo_sign.sh new-update
