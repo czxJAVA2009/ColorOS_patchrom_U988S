@@ -936,7 +936,7 @@
 
     move-result-object v2
 
-    const v3, 0x109009d
+    const v3, 0xc09041a
 
     invoke-direct {v0, v2, v3}, Landroid/widget/RemoteViews;-><init>(Ljava/lang/String;I)V
 
@@ -965,7 +965,7 @@
 
     invoke-virtual {v0, v4, v2, v3}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
-    const v2, 0x102033e
+    const v2, 0xc020474
 
     const-string v3, "setBackgroundResource"
 
@@ -1021,7 +1021,7 @@
 
     .line 827
     .local v1, f:Ljava/text/NumberFormat;
-    const v2, 0x1020342
+    const v2, 0xc020473
 
     iget v3, p0, Landroid/app/Notification;->number:I
 

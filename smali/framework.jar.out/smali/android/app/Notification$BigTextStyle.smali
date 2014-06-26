@@ -47,9 +47,14 @@
 
 .method private makeBigContentView()Landroid/widget/RemoteViews;
     .locals 8
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2013.02.04: make notification to oppo\'s"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    const v7, 0x1020343
+    const v7, 0xc02047b
 
     const/4 v2, 0x0
 
@@ -85,7 +90,7 @@
     invoke-static {v1, v3}, Landroid/app/Notification$Builder;->access$702(Landroid/app/Notification$Builder;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
 
     .line 1866
-    const v1, 0x10900a0
+    const v1, 0xc09041f
 
     invoke-virtual {p0, v1}, Landroid/app/Notification$BigTextStyle;->getStandardView(I)Landroid/widget/RemoteViews;
 
@@ -96,7 +101,7 @@
     if-eqz v6, :cond_0
 
     .line 1870
-    const v1, 0x102033f
+    const v1, 0xc020477
 
     move v3, v2
 

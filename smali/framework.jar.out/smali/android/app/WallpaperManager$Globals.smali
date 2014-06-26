@@ -636,7 +636,7 @@
 
     move-result-object v7
 
-    const v9, 0x1080297
+    const v9, 0xc08003e
 
     invoke-virtual {v7, v9}, Landroid/content/res/Resources;->openRawResource(I)Ljava/io/InputStream;
 
@@ -656,7 +656,7 @@
 
     move-result-object v7
 
-    const v9, 0x1080297
+    const v9, 0xc08003e
 
     invoke-virtual {v7, v9}, Landroid/content/res/Resources;->openRawResource(I)Ljava/io/InputStream;
 
@@ -672,7 +672,7 @@
 
     move-result-object v7
 
-    const v9, 0x1080297
+    const v9, 0xc08003e
 
     invoke-virtual {v7, v9}, Landroid/content/res/Resources;->openRawResource(I)Ljava/io/InputStream;
     :try_end_5

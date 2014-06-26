@@ -158,15 +158,21 @@
 .method public loadGroupIcon(Landroid/content/pm/PackageManager;)Landroid/graphics/drawable/Drawable;
     .locals 3
     .parameter "pm"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "YongDong.Zhang@Plf.SDK,2013.10.05 : Modify for make convertIcon useless here"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
+    const/4 v2, 0x0
     .line 102
     iget v1, p0, Landroid/content/pm/PackageItemInfo;->icon:I
 
     if-eqz v1, :cond_0
 
     .line 103
-    invoke-virtual {p0, p1}, Landroid/widget/AppSecurityPermissions$MyPermissionGroupInfo;->loadIcon(Landroid/content/pm/PackageManager;)Landroid/graphics/drawable/Drawable;
+    invoke-virtual {p0, p1, v2}, Landroid/widget/AppSecurityPermissions$MyPermissionGroupInfo;->loadIcon(Landroid/content/pm/PackageManager;Z)Landroid/graphics/drawable/Drawable;
 
     move-result-object v1
 

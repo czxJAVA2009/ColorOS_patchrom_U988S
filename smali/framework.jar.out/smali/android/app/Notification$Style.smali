@@ -76,13 +76,18 @@
 .method protected getStandardView(I)Landroid/widget/RemoteViews;
     .locals 9
     .parameter "layoutId"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2013.02.04: make notification to oppo\'s"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    const v8, 0x1020346
+    const v8, 0xc020483
 
-    const v7, 0x1020341
+    const v7, 0xc020479
 
-    const v6, 0x102033f
+    const v6, 0xc020477
 
     const/16 v5, 0x8
 

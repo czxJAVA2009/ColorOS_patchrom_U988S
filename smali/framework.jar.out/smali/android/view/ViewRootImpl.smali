@@ -3887,6 +3887,26 @@
     invoke-direct {p0, v1}, Landroid/view/ViewRootImpl;->pointerNormalProcessBySmartPower(Landroid/view/MotionEvent;)V
 
     .line 3692
+    invoke-static {}, Landroid/view/OppoScreenShotUtil;->checkPauseDeliverPointer()Z
+
+    move-result v4
+
+    if-eqz v4, :cond_oppo_1
+
+    iget-object v4, p1, Landroid/view/ViewRootImpl$QueuedInputEvent;->mEvent:Landroid/view/InputEvent;
+
+    check-cast v4, Landroid/view/MotionEvent;
+
+    iget-object v5, p0, Landroid/view/ViewRootImpl;->mView:Landroid/view/View;
+
+    invoke-static {v4, v5}, Landroid/view/OppoScreenShotUtil;->dealPausedDeliverPointer(Landroid/view/MotionEvent;Landroid/view/View;)V
+
+    invoke-direct {p0, p1, v7}, Landroid/view/ViewRootImpl;->finishInputEvent(Landroid/view/ViewRootImpl$QueuedInputEvent;Z)V
+
+    :goto_oppo_1
+    return-void
+
+    :cond_oppo_1
     iget-object v4, p0, Landroid/view/ViewRootImpl;->mInputEventConsistencyVerifier:Landroid/view/InputEventConsistencyVerifier;
 
     if-eqz v4, :cond_0

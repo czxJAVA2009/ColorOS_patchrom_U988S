@@ -22,6 +22,8 @@
 
 .field public static final SERIF:Landroid/graphics/Typeface;
 
+.field public static isFlipFontUsed:Z
+
 .field static sDefaults:[Landroid/graphics/Typeface;
 
 .field private static final sTypefaceCache:Landroid/util/SparseArray;
