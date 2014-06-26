@@ -7568,7 +7568,7 @@
     .local v2, sysCurTheme:I
     iget-object v3, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
 
-    invoke-virtual {v3, v2}, Landroid/content/Context;->setTheme(I)V
+    #invoke-virtual {v3, v2}, Landroid/content/Context;->setTheme(I)V
 
     iput-object p2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mWindowManager:Landroid/view/IWindowManager;
 
