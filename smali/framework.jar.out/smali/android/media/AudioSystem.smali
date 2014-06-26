@@ -198,13 +198,7 @@
 
 .field public static final NUM_STREAMS:I = 0x5
 
-.field private static final NUM_STREAM_TYPES:I = 0xb
-    .annotation build Landroid/annotation/OppoHook;
-        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
-        note = "add for fm stream type"
-        property = .enum Landroid/annotation/OppoHook$OppoRomType;->QCOM:Landroid/annotation/OppoHook$OppoRomType;
-    .end annotation
-.end field
+.field private static final NUM_STREAM_TYPES:I = 0xa
 
 .field public static final PHONE_STATE_INCALL:I = 0x2
 
@@ -495,7 +489,8 @@
     .locals 1
 
     .prologue
-    const/16 v0, 0xb
+    .line 62
+    const/16 v0, 0xa
 
     return v0
 .end method
