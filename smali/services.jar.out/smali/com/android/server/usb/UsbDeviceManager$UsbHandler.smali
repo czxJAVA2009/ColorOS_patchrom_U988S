@@ -1854,7 +1854,7 @@
 
     const-string v3, "com.android.settings"
 
-    const-string v5, "com.android.settings.UsbConnectType"
+    const-string v5, "com.android.settings.UsbSettings"
 
     invoke-direct {v0, v3, v5}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
