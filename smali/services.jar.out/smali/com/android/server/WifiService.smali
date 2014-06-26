@@ -39,7 +39,13 @@
 
 .field private static final ICON_HOTSPOT_CLOSED:I = 0x1080371
 
-.field private static final ICON_NETWORKS_AVAILABLE:I = 0x1080614
+.field private static final ICON_NETWORKS_AVAILABLE:I = 0xc080465
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Congwei.Yan@Plf.CommSrv,2013.10.11:modify for replace with oppo\'s icon"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field private static final IDLE_REQUEST:I = 0x0
 
@@ -3201,7 +3207,7 @@
     .prologue
     const/4 v8, 0x0
 
-    const v7, 0x1080614
+    const v7, 0xc080465
 
     .line 2083
     if-nez p1, :cond_1

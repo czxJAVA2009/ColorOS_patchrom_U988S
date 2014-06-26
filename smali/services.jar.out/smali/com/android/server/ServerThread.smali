@@ -101,6 +101,11 @@
 
 .method public run()V
     .locals 144
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jun.Zhang@Plf.Framework, to use oppo button light, three pointers move shot screen"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 94
@@ -815,9 +820,9 @@
     invoke-static {v7, v9}, Landroid/util/Slog;->i(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 303
-    new-instance v6, Lcom/android/server/LightsService;
+    new-instance v6, Lcom/android/server/OppoLightsService;
 
-    invoke-direct {v6, v5}, Lcom/android/server/LightsService;-><init>(Landroid/content/Context;)V
+    invoke-direct {v6, v5}, Lcom/android/server/OppoLightsService;-><init>(Landroid/content/Context;)V
     :try_end_b
     .catch Ljava/lang/RuntimeException; {:try_start_b .. :try_end_b} :catch_1
 
@@ -854,11 +859,11 @@
     invoke-static {v7, v9}, Landroid/util/Slog;->i(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 310
-    new-instance v134, Lcom/android/server/VibratorService;
+    new-instance v134, Lcom/android/server/OppoVibratorService;
 
     move-object/from16 v0, v134
 
-    invoke-direct {v0, v5}, Lcom/android/server/VibratorService;-><init>(Landroid/content/Context;)V
+    invoke-direct {v0, v5}, Lcom/android/server/OppoVibratorService;-><init>(Landroid/content/Context;)V
     :try_end_d
     .catch Ljava/lang/RuntimeException; {:try_start_d .. :try_end_d} :catch_55
 
@@ -2283,6 +2288,12 @@
 
     .line 729
     :goto_34
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, v142
+
+    invoke-direct {v0, v5, v1}, Lcom/android/server/ServerThread;->initOppoExService(Landroid/content/Context;Lcom/android/server/wm/WindowManagerService;)V
+
     :try_start_4c
     const-string v7, "SystemServer"
 

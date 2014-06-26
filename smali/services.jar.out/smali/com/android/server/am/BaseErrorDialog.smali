@@ -13,12 +13,17 @@
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 4
     .parameter "context"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework, modify for alert dialog style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/high16 v3, 0x2
 
     .line 31
-    const v1, 0x10303fb
+    const v1, 0xc030007
 
     invoke-direct {p0, p1, v1}, Landroid/app/AlertDialog;-><init>(Landroid/content/Context;I)V
 

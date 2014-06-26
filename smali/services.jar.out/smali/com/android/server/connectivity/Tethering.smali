@@ -1266,24 +1266,14 @@
 
     invoke-static {v13, v14}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 444
-    if-eqz v12, :cond_9
+    if-eqz v11, :cond_a
 
-    .line 445
-    if-eqz v3, :cond_8
+    if-nez v12, :cond_8
 
-    .line 446
-    const v13, 0x1080654
+    if-eqz v3, :cond_9
 
-    move-object/from16 v0, p0
-
-    invoke-direct {v0, v13}, Lcom/android/server/connectivity/Tethering;->showTetheredNotification(I)V
-
-    goto/16 :goto_0
-
-    .line 448
     :cond_8
-    const v13, 0x1080656
+    const v13, 0xc080462
 
     move-object/from16 v0, p0
 
@@ -1291,9 +1281,39 @@
 
     goto/16 :goto_0
 
-    .line 450
     :cond_9
-    if-eqz v3, :cond_a
+    const v13, 0xc080464
+
+    move-object/from16 v0, p0
+
+    invoke-direct {v0, v13}, Lcom/android/server/connectivity/Tethering;->showTetheredNotification(I)V
+
+    goto/16 :goto_0
+
+    :cond_a
+    if-eqz v12, :cond_c
+
+    if-eqz v3, :cond_b
+
+    const v13, 0xc080462
+
+    move-object/from16 v0, p0
+
+    invoke-direct {v0, v13}, Lcom/android/server/connectivity/Tethering;->showTetheredNotification(I)V
+
+    goto/16 :goto_0
+
+    :cond_b
+    const v13, 0xc080463
+
+    move-object/from16 v0, p0
+
+    invoke-direct {v0, v13}, Lcom/android/server/connectivity/Tethering;->showTetheredNotification(I)V
+
+    goto/16 :goto_0
+
+    :cond_c
+    if-eqz v3, :cond_d
 
     .line 451
     const v13, 0x1080653
@@ -1305,7 +1325,7 @@
     goto/16 :goto_0
 
     .line 453
-    :cond_a
+    :cond_d
     invoke-direct/range {p0 .. p0}, Lcom/android/server/connectivity/Tethering;->clearTetheredNotification()V
 
     goto/16 :goto_0

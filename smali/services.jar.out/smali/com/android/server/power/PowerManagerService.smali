@@ -25,7 +25,8 @@
         Lcom/android/server/power/PowerManagerService$AutoBackLightTimeoutTask;,
         Lcom/android/server/power/PowerManagerService$SerachNetwokStatisticals;,
         Lcom/android/server/power/PowerManagerService$LocationWirelessEnv;,
-        Lcom/android/server/power/PowerManagerService$SmartPowerHandler;
+        Lcom/android/server/power/PowerManagerService$SmartPowerHandler;,
+	Lcom/android/server/power/PowerManagerService$OppoHelper;
     }
 .end annotation
 
@@ -16072,7 +16073,7 @@
 
     move-result v7
 
-    if-eqz v7, :cond_4
+    if-eqz v7, :cond_3
 
     invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
@@ -19625,6 +19626,9 @@
 
     iput-object v2, v0, Lcom/android/server/power/PowerManagerService;->mAttentionLight:Lcom/android/server/LightsService$Light;
 
+    iget-object v2, v0, Lcom/android/server/power/PowerManagerService;->mLightsService:Lcom/android/server/LightsService;
+
+    invoke-static {v2}, Lcom/android/server/power/PowerManagerService$OppoHelper;->setButtonLight(Lcom/android/server/LightsService;)V
     .line 2534
     new-instance v13, Landroid/content/IntentFilter;
 

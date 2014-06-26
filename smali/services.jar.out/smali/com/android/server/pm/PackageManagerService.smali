@@ -10252,6 +10252,29 @@
     .line 5060
     .restart local v6       #allowed:Z
     :goto_6
+    move-object/from16 v0, p1
+
+    iget-object v0, v0, Landroid/content/pm/PackageParser$Package;->mSharedUserId:Ljava/lang/String;
+
+    move-object/from16 v22, v0
+
+    if-eqz v22, :cond_oppo_1
+
+    move-object/from16 v0, p1
+
+    iget-object v0, v0, Landroid/content/pm/PackageParser$Package;->mSharedUserId:Ljava/lang/String;
+
+    move-object/from16 v22, v0
+
+    invoke-static/range {v22 .. v22}, Lcom/android/server/pm/OppoPackageManagerHelper;->IsShareUid(Ljava/lang/String;)Z
+
+    move-result v22
+
+    if-eqz v22, :cond_oppo_1
+
+    const/4 v6, 0x1
+
+    :cond_oppo_1
     if-nez v6, :cond_b
 
     iget v0, v8, Lcom/android/server/pm/BasePermission;->protectionLevel:I
