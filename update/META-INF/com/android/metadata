@@ -1,0 +1,3 @@
+post-build=generic/pluto/pluto:4.2.2/JDQ39/eng.ztetd.20131122.113624:user/release-keys
+post-timestamp=1385091467
+pre-device=pluto
