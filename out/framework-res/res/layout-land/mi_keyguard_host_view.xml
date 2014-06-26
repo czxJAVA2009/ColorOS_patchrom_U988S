@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.policy.impl.keyguard.MiKeyguardHostView androidprv:gravity="center_horizontal" androidprv:orientation="vertical" androidprv:id="@id/mi_keyguard_host_view" androidprv:layout_width="fill_parent" androidprv:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/res/android">
+    <com.android.internal.policy.impl.keyguard.MiClingAnimatorView androidprv:gravity="center_horizontal" androidprv:orientation="vertical" androidprv:id="@id/mi_cling_animator_view" androidprv:layout_width="fill_parent" androidprv:layout_height="fill_parent">
+        <include layout="@layout/keyguard_zte_scroller" />
+        <com.android.internal.policy.impl.keyguard.KeyguardSecurityContainer androidprv:gravity="bottom|center" androidprv:layout_gravity="bottom|center" androidprv:id="@id/keyguard_security_container" androidprv:padding="0.0dip" androidprv:layout_width="@dimen/keyguard_security_width" androidprv:layout_height="@dimen/keyguard_security_height" androidprv:layout_maxHeight="@dimen/keyguard_security_height" androidprv:layout_childType="challenge">
+            <com.android.internal.policy.impl.keyguard.KeyguardSecurityViewFlipper androidprv:gravity="center" androidprv:id="@id/view_flipper" androidprv:paddingTop="@dimen/keyguard_security_view_margin" androidprv:clipChildren="false" androidprv:clipToPadding="false" androidprv:layout_width="fill_parent" androidprv:layout_height="fill_parent" />
+        </com.android.internal.policy.impl.keyguard.KeyguardSecurityContainer>
+        <LinearLayout androidprv:gravity="center_horizontal" androidprv:layout_width="fill_parent" androidprv:layout_height="fill_parent" androidprv:layout_marginTop="@dimen/keyguard_cling_margin_top">
+            <include androidprv:id="@id/imageview_cling_prompt" androidprv:visibility="gone" layout="@layout/zte_lockscreen_changeable_imageview_cling" />
+        </LinearLayout>
+        <LinearLayout androidprv:gravity="center_horizontal" androidprv:layout_width="fill_parent" androidprv:layout_height="fill_parent" androidprv:layout_marginTop="@dimen/keyguard_cling_margin_top">
+            <include androidprv:id="@id/unlockview_cling_prompt" androidprv:visibility="gone" layout="@layout/zte_lockscreen_changeable_unlockview_cling" />
+        </LinearLayout>
+    </com.android.internal.policy.impl.keyguard.MiClingAnimatorView>
+</com.android.internal.policy.impl.keyguard.MiKeyguardHostView>

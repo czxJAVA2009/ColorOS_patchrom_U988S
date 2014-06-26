@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.policy.impl.keyguard.KeyguardStatusView android:gravity="top|center" android:orientation="vertical" android:id="@id/keyguard_status_view_face_palm" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/keyguard_accessibility_status"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.internal.policy.impl.keyguard.ClockView android:id="@id/clock_view" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:id="@id/timeDisplay" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <ImageView android:id="@id/hour_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/time_8" />
+                <ImageView android:id="@id/hour_0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/ztedigitalclock_image_margin_left" android:src="@drawable/time_8" />
+                <ImageView android:id="@id/parting_point" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/ztedigitalclock_image_margin_left" android:src="@drawable/parting_point" />
+                <ImageView android:id="@id/minute_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/ztedigitalclock_image_margin_left" android:src="@drawable/time_8" />
+                <ImageView android:id="@id/minute_0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/ztedigitalclock_image_margin_left" android:src="@drawable/time_8" />
+            </LinearLayout>
+            <TextView android:textAppearance="?textAppearanceMedium" android:textSize="22.0sp" android:textColor="?textColorPrimaryInverse" android:ellipsize="none" android:id="@id/am_pm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:singleLine="true" android:shadowColor="#c0000000" android:shadowDx="0.0" android:shadowDy="0.0" android:shadowRadius="3.0" android:layout_toRightOf="@id/timeDisplay" android:layout_alignBottom="@id/timeDisplay" />
+        </com.android.internal.policy.impl.keyguard.ClockView>
+        <include layout="@layout/keyguard_status_area" />
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:padding="@dimen/keyguard_status_textview_padding" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:textAppearance="?textAppearance" android:textSize="@dimen/kg_status_line_font_size" android:textColor="?textColorPrimaryInverse" android:ellipsize="marquee" android:id="@id/alarm_status" android:paddingRight="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:drawablePadding="4.0dip" />
+            <include android:layout_width="wrap_content" android:layout_height="wrap_content" layout="@layout/keyguard_message_area" />
+        </LinearLayout>
+    </LinearLayout>
+</com.android.internal.policy.impl.keyguard.KeyguardStatusView>

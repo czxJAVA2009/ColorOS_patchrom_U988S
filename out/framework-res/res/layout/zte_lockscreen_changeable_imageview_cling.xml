@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:background="@drawable/keyguard_cling_bg" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:layout_gravity="center" android:id="@id/cling_prompt1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prompt_imageview_changeable1" style="@style/ClingText" />
+    <TextView android:layout_gravity="center" android:id="@id/cling_prompt2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/prompt_imageview_changeable2" style="@style/ClingText" />
+</LinearLayout>
