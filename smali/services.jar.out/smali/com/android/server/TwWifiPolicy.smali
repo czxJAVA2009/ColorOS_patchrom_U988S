@@ -884,7 +884,7 @@
     .line 303
     iget-object v6, p0, Lcom/android/server/TwWifiPolicy;->mContext:Landroid/content/Context;
 
-    invoke-virtual {v6, v1}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
+    #invoke-virtual {v6, v1}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
 
     .line 304
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
@@ -1115,7 +1115,7 @@
     .line 429
     iget-object v6, p0, Lcom/android/server/TwWifiPolicy;->mContext:Landroid/content/Context;
 
-    invoke-virtual {v6, v2}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
+    #invoke-virtual {v6, v2}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
 
     .line 430
     const/4 v6, 0x1
@@ -2449,7 +2449,7 @@
     .line 510
     iget-object v2, p0, Lcom/android/server/TwWifiPolicy;->mContext:Landroid/content/Context;
 
-    invoke-virtual {v2, v0}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
+    #invoke-virtual {v2, v0}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
 
     .line 511
     sput-boolean v6, Lcom/android/server/TwWifiPolicy;->isConnectWifi:Z
