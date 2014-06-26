@@ -2,8 +2,17 @@
 .super Landroid/provider/Settings$NameValueTable;
 .source "Settings.java"
 
+# interfaces
+.implements Lcom/oppo/provider/OppoSettings$Mtk_Secure;
+
 
 # annotations
+.annotation build Landroid/annotation/OppoHook;
+    level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+    note = "OPPO CHANGE"
+    property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+.end annotation
+
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Landroid/provider/Settings;
 .end annotation

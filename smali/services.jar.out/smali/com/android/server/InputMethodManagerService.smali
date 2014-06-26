@@ -4293,6 +4293,11 @@
 .method private showInputMethodMenuInternal(Z)V
     .locals 28
     .parameter "showSubtypes"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.Framework.SDK add inputmothod select"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 2579

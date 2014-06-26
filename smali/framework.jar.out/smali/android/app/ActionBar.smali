@@ -236,3 +236,19 @@
 
 .method public abstract show()V
 .end method
+
+.method public abstract updateAnimateTab(IFI)V
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Xiaokang.Feng@Plf.SDK,2013.10.07: Add for oppoStyle Tab"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end method
+
+.method public abstract updateScrollState(I)V
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Xiaokang.Feng@Plf.SDK,2013.10.07: Add for oppoStyle Tab"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end method

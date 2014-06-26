@@ -139,34 +139,27 @@
 
     iget-object v1, p0, Landroid/app/Notification$Style;->mSummaryText:Ljava/lang/CharSequence;
 
-    .line 1710
     .local v1, overflowText:Ljava/lang/CharSequence;
     :goto_1
     if-eqz v1, :cond_3
 
-    .line 1711
-    const v2, 0x1020046
+    const v2, 0xc020435
 
     invoke-virtual {v0, v2, v1}, Landroid/widget/RemoteViews;->setTextViewText(ILjava/lang/CharSequence;)V
 
-    .line 1712
     invoke-virtual {v0, v8, v4}, Landroid/widget/RemoteViews;->setViewVisibility(II)V
 
-    .line 1713
     invoke-virtual {v0, v7, v4}, Landroid/widget/RemoteViews;->setViewVisibility(II)V
 
-    .line 1719
     :goto_2
     return-object v0
 
-    .line 1703
     .end local v1           #overflowText:Ljava/lang/CharSequence;
     :cond_1
     invoke-virtual {v0, v6, v4}, Landroid/widget/RemoteViews;->setViewVisibility(II)V
 
     goto :goto_0
 
-    .line 1707
     :cond_2
     iget-object v2, p0, Landroid/app/Notification$Style;->mBuilder:Landroid/app/Notification$Builder;
 

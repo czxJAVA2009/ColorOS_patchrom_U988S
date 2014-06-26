@@ -209,6 +209,13 @@
 
 .field public static final TITLE_CHANGED:I = 0x40
 
+.field public static final TYPE_APK_LOCKSCREEN:I = 0xa10
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangkai add for apklock"
+    .end annotation
+.end field
+
 .field public static final TYPE_APPLICATION:I = 0x2
 
 .field public static final TYPE_APPLICATION_ATTACHED_DIALOG:I = 0x3eb

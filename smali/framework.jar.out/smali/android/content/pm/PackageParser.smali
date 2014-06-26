@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Landroid/content/pm/PackageParser$Injector;,
         Landroid/content/pm/PackageParser$ServiceIntentInfo;,
         Landroid/content/pm/PackageParser$ActivityIntentInfo;,
         Landroid/content/pm/PackageParser$IntentInfo;,
@@ -7898,6 +7899,12 @@
     .parameter "parser"
     .parameter "flags"
     .parameter "outError"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK,2013.10.05: modify for oppo package"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Lorg/xmlpull/v1/XmlPullParserException;,
@@ -8095,6 +8102,12 @@
     move-object/from16 v0, v38
 
     invoke-static {v0, v3}, Landroid/content/pm/PackageParser;->validateName(Ljava/lang/String;Z)Ljava/lang/String;
+
+    move-result-object v3
+
+    move-object/from16 v0, v34
+
+    invoke-static {v0, v3}, Landroid/content/pm/PackageParser$Injector;->filterOppoNameError(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v29
 
@@ -10387,6 +10400,12 @@
     .parameter "attrs"
     .parameter "flags"
     .parameter "outError"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK,2013.10.05: modify for oppo package"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;,
@@ -10496,6 +10515,10 @@
     const/4 v12, 0x1
 
     invoke-static {v6, v12}, Landroid/content/pm/PackageParser;->validateName(Ljava/lang/String;Z)Ljava/lang/String;
+
+    move-result-object v12
+
+    invoke-static {v6, v12}, Landroid/content/pm/PackageParser$Injector;->filterOppoNameError(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v4
 
@@ -10743,6 +10766,11 @@
     .locals 32
     .parameter "packageFilePath"
     .parameter "flags"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework, modify for apk encryption"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 717
@@ -10845,7 +10873,7 @@
 
     move/from16 v0, v25
 
-    invoke-virtual {v5, v0, v6}, Landroid/content/res/AssetManager;->openXmlResourceParser(ILjava/lang/String;)Landroid/content/res/XmlResourceParser;
+    invoke-virtual {v5, v0, v6}, Landroid/content/res/AssetManager;->openXmlResourceParserInOppoEncryption(ILjava/lang/String;)Landroid/content/res/XmlResourceParser;
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_3
 
@@ -11100,6 +11128,12 @@
     .parameter "attrs"
     .parameter "flags"
     .parameter "outError"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK,2013.10.05: modify for oppo package"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;,
@@ -11187,13 +11221,15 @@
 
     goto :goto_0
 
-    .line 812
     :cond_5
     invoke-static {v1, v7}, Landroid/content/pm/PackageParser;->validateName(Ljava/lang/String;Z)Ljava/lang/String;
 
+    move-result-object v4
+
+    invoke-static {v1, v4}, Landroid/content/pm/PackageParser$Injector;->filterOppoNameError(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
     move-result-object v0
 
-    .line 813
     .local v0, nameError:Ljava/lang/String;
     if-eqz v0, :cond_6
 
@@ -14418,6 +14454,11 @@
     .locals 21
     .parameter "pkg"
     .parameter "flags"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework, modify for apk encryption"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 569
@@ -14643,6 +14684,8 @@
 
     .line 620
     .local v14, manifest:Ljava/util/jar/Manifest;
+    invoke-static {v11}, Landroid/content/pm/OppoOpkParserUtil;->checkImeiForOpk(Ljava/util/jar/JarFile;)V
+
     :cond_3
     :goto_1
     invoke-interface {v6}, Ljava/util/Enumeration;->hasMoreElements()Z
@@ -14722,11 +14765,15 @@
 
     move-result-object v13
 
-    .line 641
     .local v13, localCerts:[Ljava/security/cert/Certificate;
+    invoke-static {v11, v12}, Landroid/content/pm/OppoOpkParserUtil;->checkFileForOpk(Ljava/util/jar/JarFile;Ljava/util/jar/JarEntry;)Z
+
+    move-result v18
+
+    if-nez v18, :cond_3
+
     if-nez v13, :cond_5
 
-    .line 642
     const-string v18, "PackageParser"
 
     new-instance v19, Ljava/lang/StringBuilder;
@@ -15308,6 +15355,11 @@
     .parameter "destCodePath"
     .parameter "metrics"
     .parameter "flags"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework, modify for apk encryptionYaojun.Luo@Plf.SDK, modify for rom theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 476
@@ -15472,12 +15524,10 @@
 
     move-result v25
 
-    .line 505
     .local v25, cookie:I
     if-eqz v25, :cond_4
 
-    .line 506
-    new-instance v32, Landroid/content/res/Resources;
+    new-instance v32, Landroid/content/res/OppoResources;
 
     const/4 v6, 0x0
 
@@ -15485,7 +15535,7 @@
 
     move-object/from16 v1, p3
 
-    invoke-direct {v0, v5, v1, v6}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)V
+    invoke-direct {v0, v5, v1, v6}, Landroid/content/res/OppoResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)V
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
 
@@ -15534,7 +15584,7 @@
 
     move/from16 v0, v25
 
-    invoke-virtual {v5, v0, v6}, Landroid/content/res/AssetManager;->openXmlResourceParser(ILjava/lang/String;)Landroid/content/res/XmlResourceParser;
+    invoke-virtual {v5, v0, v6}, Landroid/content/res/AssetManager;->openXmlResourceParserInOppoEncryption(ILjava/lang/String;)Landroid/content/res/XmlResourceParser;
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_3
 

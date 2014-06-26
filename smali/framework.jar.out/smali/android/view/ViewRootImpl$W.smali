@@ -445,7 +445,7 @@
     invoke-direct {v1, p3}, Landroid/os/ParcelFileDescriptor$AutoCloseOutputStream;-><init>(Landroid/os/ParcelFileDescriptor;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
-    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
 
     .line 5444
     .end local v0           #clientStream:Ljava/io/OutputStream;
@@ -456,43 +456,25 @@
     .catchall {:try_start_1 .. :try_end_1} :catchall_1
     .catch Ljava/io/IOException; {:try_start_1 .. :try_end_1} :catch_4
 
-    .line 5448
     if-eqz v1, :cond_1
 
-    .line 5450
     :try_start_2
     invoke-virtual {v1}, Landroid/os/ParcelFileDescriptor$AutoCloseOutputStream;->close()V
     :try_end_2
-    .catch Ljava/io/IOException; {:try_start_2 .. :try_end_2} :catch_0
+    .catch Ljava/io/IOException; {:try_start_2 .. :try_end_2} :catch_3
 
-    .line 5458
     .end local v1           #clientStream:Ljava/io/OutputStream;
     .end local v3           #view:Landroid/view/View;
     :cond_1
     :goto_0
     return-void
 
-    .line 5451
-    .restart local v1       #clientStream:Ljava/io/OutputStream;
+    .restart local v0       #clientStream:Ljava/io/OutputStream;
     .restart local v3       #view:Landroid/view/View;
     :catch_0
     move-exception v2
 
-    .line 5452
     .local v2, e:Ljava/io/IOException;
-    invoke-virtual {v2}, Ljava/io/IOException;->printStackTrace()V
-
-    goto :goto_0
-
-    .line 5445
-    .end local v1           #clientStream:Ljava/io/OutputStream;
-    .end local v2           #e:Ljava/io/IOException;
-    .restart local v0       #clientStream:Ljava/io/OutputStream;
-    :catch_1
-    move-exception v2
-
-    .line 5446
-    .restart local v2       #e:Ljava/io/IOException;
     :goto_1
     :try_start_3
     invoke-virtual {v2}, Ljava/io/IOException;->printStackTrace()V
@@ -559,7 +541,7 @@
 
     .end local v1           #clientStream:Ljava/io/OutputStream;
     .restart local v0       #clientStream:Ljava/io/OutputStream;
-    goto :goto_2
+    goto :goto_3
 
     .line 5445
     .end local v0           #clientStream:Ljava/io/OutputStream;
@@ -666,4 +648,80 @@
     .line 5418
     :cond_0
     return-void
+.end method
+
+.method public dispatchPositionChanged(II)V
+    .locals 5
+    .parameter "left"
+    .parameter "top"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "MTK METHOD : Add for Dispatch position change"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    const/high16 v4, 0x3f00
+
+    iget-object v1, p0, Landroid/view/ViewRootImpl$W;->mViewAncestor:Ljava/lang/ref/WeakReference;
+
+    invoke-virtual {v1}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/view/ViewRootImpl;
+
+    .local v0, viewAncestor:Landroid/view/ViewRootImpl;
+    if-eqz v0, :cond_0
+
+    iget-object v1, v0, Landroid/view/ViewRootImpl;->mTranslator:Landroid/content/res/CompatibilityInfo$Translator;
+
+    if-nez v1, :cond_1
+
+    iget-object v1, v0, Landroid/view/ViewRootImpl;->mAttachInfo:Landroid/view/View$AttachInfo;
+
+    iput p1, v1, Landroid/view/View$AttachInfo;->mWindowLeft:I
+
+    iget-object v1, v0, Landroid/view/ViewRootImpl;->mAttachInfo:Landroid/view/View$AttachInfo;
+
+    iput p2, v1, Landroid/view/View$AttachInfo;->mWindowTop:I
+
+    :cond_0
+    :goto_0
+    return-void
+
+    :cond_1
+    iget-object v1, v0, Landroid/view/ViewRootImpl;->mAttachInfo:Landroid/view/View$AttachInfo;
+
+    int-to-float v2, p1
+
+    iget-object v3, v0, Landroid/view/ViewRootImpl;->mTranslator:Landroid/content/res/CompatibilityInfo$Translator;
+
+    iget v3, v3, Landroid/content/res/CompatibilityInfo$Translator;->applicationInvertedScale:F
+
+    mul-float/2addr v2, v3
+
+    add-float/2addr v2, v4
+
+    float-to-int v2, v2
+
+    iput v2, v1, Landroid/view/View$AttachInfo;->mWindowLeft:I
+
+    iget-object v1, v0, Landroid/view/ViewRootImpl;->mAttachInfo:Landroid/view/View$AttachInfo;
+
+    int-to-float v2, p2
+
+    iget-object v3, v0, Landroid/view/ViewRootImpl;->mTranslator:Landroid/content/res/CompatibilityInfo$Translator;
+
+    iget v3, v3, Landroid/content/res/CompatibilityInfo$Translator;->applicationInvertedScale:F
+
+    mul-float/2addr v2, v3
+
+    add-float/2addr v2, v4
+
+    float-to-int v2, v2
+
+    iput v2, v1, Landroid/view/View$AttachInfo;->mWindowTop:I
+
+    goto :goto_0
 .end method

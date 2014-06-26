@@ -140,6 +140,11 @@
     .parameter "context"
     .parameter "text"
     .parameter "duration"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JianJun.Dan@Plf.SDK,2013.10.05: change the Toast\'s UI to oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 238

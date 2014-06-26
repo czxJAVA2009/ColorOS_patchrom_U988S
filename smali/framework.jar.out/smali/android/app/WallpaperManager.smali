@@ -166,6 +166,11 @@
     .parameter "bm"
     .parameter "width"
     .parameter "height"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "gaoliang@Plf.Keyguard, 2013.07.22:add to make the wallpaper show full screen"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v5, 0x0
@@ -262,46 +267,33 @@
 
     iput v10, v8, Landroid/graphics/Rect;->right:I
 
-    .line 937
     invoke-virtual {p1}, Landroid/graphics/Bitmap;->getHeight()I
 
     move-result v10
 
     iput v10, v8, Landroid/graphics/Rect;->bottom:I
 
-    .line 939
     iget v10, v8, Landroid/graphics/Rect;->right:I
 
     sub-int v2, p2, v10
 
-    .line 940
     .local v2, deltaw:I
     iget v10, v8, Landroid/graphics/Rect;->bottom:I
 
     sub-int v1, p3, v10
 
-    .line 942
     .local v1, deltah:I
     if-gtz v2, :cond_3
 
     if-lez v1, :cond_4
 
-    .line 945
     :cond_3
-    if-le v2, v1, :cond_5
+    invoke-static {p2, p3, v8}, Landroid/app/WallpaperManager;->calcScale(IILandroid/graphics/Rect;)F
 
-    .line 946
-    int-to-float v10, p2
-
-    iget v11, v8, Landroid/graphics/Rect;->right:I
-
-    int-to-float v11, v11
-
-    div-float v7, v10, v11
+    move-result v7
 
     .line 950
     .local v7, scale:F
-    :goto_1
     iget v10, v8, Landroid/graphics/Rect;->right:I
 
     int-to-float v10, v10
@@ -362,46 +354,28 @@
 
     invoke-virtual {v6, v10}, Landroid/graphics/Paint;->setXfermode(Landroid/graphics/Xfermode;)Landroid/graphics/Xfermode;
 
-    .line 961
     const/4 v10, 0x0
 
     invoke-virtual {v0, p1, v10, v8, v6}, Landroid/graphics/Canvas;->drawBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Rect;Landroid/graphics/Paint;)V
 
-    .line 963
     invoke-virtual {p1}, Landroid/graphics/Bitmap;->recycle()V
 
-    .line 964
     const/4 v10, 0x0
 
     invoke-virtual {v0, v10}, Landroid/graphics/Canvas;->setBitmap(Landroid/graphics/Bitmap;)V
-
-    move-object p1, v5
-
-    .line 965
-    goto/16 :goto_0
-
-    .line 948
-    .end local v6           #paint:Landroid/graphics/Paint;
-    :cond_5
-    int-to-float v10, p3
-
-    iget v11, v8, Landroid/graphics/Rect;->bottom:I
     :try_end_0
     .catch Ljava/lang/OutOfMemoryError; {:try_start_0 .. :try_end_0} :catch_0
 
-    int-to-float v11, v11
+    move-object p1, v5
 
-    div-float v7, v10, v11
-
-    .restart local v7       #scale:F
-    goto :goto_1
+    goto/16 :goto_0
 
     .line 966
     .end local v0           #c:Landroid/graphics/Canvas;
     .end local v1           #deltah:I
     .end local v2           #deltaw:I
     .end local v5           #newbm:Landroid/graphics/Bitmap;
-    .end local v7           #scale:F
+    .end local v6           #paint:Landroid/graphics/Paint;
     .end local v8           #targetRect:Landroid/graphics/Rect;
     :catch_0
     move-exception v3
@@ -555,6 +529,12 @@
 # virtual methods
 .method public clear()V
     .locals 1
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "gaoliang@Plf.Keyguard, 2013.07.22:add to change the default wallpaper res"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1173,6 +1153,12 @@
 .method public setBitmap(Landroid/graphics/Bitmap;)V
     .locals 5
     .parameter "bitmap"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "gaoliang@Plf.Keyguard,2012.08.27:add to resolve the problem that set big wallpaper too slow"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;
@@ -1350,7 +1336,7 @@
     .end local v1           #fos:Ljava/io/FileOutputStream;
     .local v2, fos:Ljava/io/FileOutputStream;
     :try_start_2
-    sget-object v3, Landroid/graphics/Bitmap$CompressFormat;->PNG:Landroid/graphics/Bitmap$CompressFormat;
+    sget-object v3, Landroid/graphics/Bitmap$CompressFormat;->JPEG:Landroid/graphics/Bitmap$CompressFormat;
 
     const/16 v4, 0x5a
 
@@ -2113,4 +2099,49 @@
     move-exception v3
 
     goto :goto_1
+.end method
+
+.method static calcScale(IILandroid/graphics/Rect;)F
+    .locals 4
+    .parameter "width"
+    .parameter "height"
+    .parameter "targetRect"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Qihu.Liu@Prd.DesktopApp.Wallpaper, 2013/02/05 : Wanglan Add for smali"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    int-to-float v2, p0
+
+    iget v3, p2, Landroid/graphics/Rect;->right:I
+
+    int-to-float v3, v3
+
+    div-float v1, v2, v3
+
+    .local v1, scalew:F
+    int-to-float v2, p1
+
+    iget v3, p2, Landroid/graphics/Rect;->bottom:I
+
+    int-to-float v3, v3
+
+    div-float v0, v2, v3
+
+    .local v0, scaleh:F
+    cmpl-float v2, v1, v0
+
+    if-lez v2, :cond_0
+
+    .end local v1           #scalew:F
+    :goto_0
+    return v1
+
+    .restart local v1       #scalew:F
+    :cond_0
+    move v1, v0
+
+    goto :goto_0
 .end method

@@ -3522,6 +3522,11 @@
 .method protected generateLayout(Lcom/android/internal/policy/impl/PhoneWindow$DecorView;)Landroid/view/ViewGroup;
     .locals 22
     .parameter "decor"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05 : Modify for ActionBar of oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 2606
@@ -4476,6 +4481,12 @@
     invoke-virtual/range {v19 .. v19}, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->startChanging()V
 
     .line 2812
+    move-object/from16 v0, p0
+
+    invoke-virtual {v0, v10}, Lcom/android/internal/policy/impl/PhoneWindow;->hookGetScreenLayout(I)I
+
+    move-result v10
+
     move-object/from16 v0, p0
 
     iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindow;->mLayoutInflater:Landroid/view/LayoutInflater;
@@ -8041,4 +8052,17 @@
     .line 1243
     :cond_0
     return-void
+.end method
+
+.method public hookGetScreenLayout(I)I
+    .locals 0
+    .parameter "layoutResource"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05 : Add for ActionBar of oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    return p1
 .end method

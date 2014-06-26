@@ -176,6 +176,14 @@
     .end annotation
 .end field
 
+.field mOppoActivityStackHelper:Lcom/android/server/am/OppoActivityStackHelper;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework, modify for activity stack helper, for statusbar tansparent"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field mPausingActivity:Lcom/android/server/am/ActivityRecord;
 
 .field public mPowerServiceClient:Lcom/nvidia/PowerServiceClient;
@@ -287,155 +295,130 @@
 
     const/4 v2, 0x0
 
-    .line 437
     invoke-direct/range {p0 .. p0}, Ljava/lang/Object;-><init>()V
 
-    .line 168
     iput-object v2, p0, Lcom/android/server/am/ActivityStack;->mBatteryStatsImpl:Lcom/android/internal/os/BatteryStatsImpl;
 
-    .line 169
     iput-object v2, p0, Lcom/android/server/am/ActivityStack;->mCurForeGroundAppPkg:Ljava/lang/String;
 
-    .line 176
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mHistory:Ljava/util/ArrayList;
 
-    .line 181
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mValidateAppTokens:Ljava/util/ArrayList;
 
-    .line 188
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mLRUActivities:Ljava/util/ArrayList;
 
-    .line 195
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mWaitingVisibleActivities:Ljava/util/ArrayList;
 
-    .line 203
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mStoppingActivities:Ljava/util/ArrayList;
 
-    .line 209
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mGoingToSleepActivities:Ljava/util/ArrayList;
 
-    .line 216
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mNoAnimActivities:Ljava/util/ArrayList;
 
-    .line 224
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mFinishingActivities:Ljava/util/ArrayList;
 
-    .line 230
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mWaitingActivityLaunched:Ljava/util/ArrayList;
 
-    .line 236
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mWaitingActivityVisible:Ljava/util/ArrayList;
 
-    .line 239
     new-instance v1, Ljava/util/ArrayList;
 
     invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mStartingUsers:Ljava/util/ArrayList;
 
-    .line 261
     iput-object v2, p0, Lcom/android/server/am/ActivityStack;->mPausingActivity:Lcom/android/server/am/ActivityRecord;
 
-    .line 268
     iput-object v2, p0, Lcom/android/server/am/ActivityStack;->mLastPausedActivity:Lcom/android/server/am/ActivityRecord;
 
-    .line 273
     iput-object v2, p0, Lcom/android/server/am/ActivityStack;->mResumedActivity:Lcom/android/server/am/ActivityRecord;
 
-    .line 280
     iput-object v2, p0, Lcom/android/server/am/ActivityStack;->mLastStartedActivity:Lcom/android/server/am/ActivityRecord;
 
-    .line 292
     iput-boolean v3, p0, Lcom/android/server/am/ActivityStack;->mUserLeaving:Z
 
-    .line 294
     const-wide/16 v1, 0x0
 
     iput-wide v1, p0, Lcom/android/server/am/ActivityStack;->mInitialStartTime:J
 
-    .line 299
     iput-boolean v3, p0, Lcom/android/server/am/ActivityStack;->mSleepTimeout:Z
 
-    .line 304
     iput-boolean v3, p0, Lcom/android/server/am/ActivityStack;->mDismissKeyguardOnNextActivity:Z
 
-    .line 306
     iput v4, p0, Lcom/android/server/am/ActivityStack;->mThumbnailWidth:I
 
-    .line 307
     iput v4, p0, Lcom/android/server/am/ActivityStack;->mThumbnailHeight:I
 
-    .line 333
+    new-instance v1, Lcom/android/server/am/OppoActivityStackHelper;
+
+    invoke-direct {v1}, Lcom/android/server/am/OppoActivityStackHelper;-><init>()V
+
+    iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mOppoActivityStackHelper:Lcom/android/server/am/OppoActivityStackHelper;
+
     new-instance v1, Lcom/android/server/am/ActivityStack$1;
 
     invoke-direct {v1, p0}, Lcom/android/server/am/ActivityStack$1;-><init>(Lcom/android/server/am/ActivityStack;)V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mHandler:Landroid/os/Handler;
 
-    .line 438
     iput-object p1, p0, Lcom/android/server/am/ActivityStack;->mService:Lcom/android/server/am/ActivityManagerService;
 
-    .line 439
     iput-object p2, p0, Lcom/android/server/am/ActivityStack;->mContext:Landroid/content/Context;
 
-    .line 440
     iput-boolean p3, p0, Lcom/android/server/am/ActivityStack;->mMainStack:Z
 
-    .line 441
     new-instance v1, Lcom/nvidia/NvAppProfileService;
 
     invoke-direct {v1, p2}, Lcom/nvidia/NvAppProfileService;-><init>(Landroid/content/Context;)V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mAppProfileService:Lcom/nvidia/NvAppProfileService;
 
-    .line 442
     new-instance v1, Lcom/nvidia/PowerServiceClient;
 
     invoke-direct {v1}, Lcom/nvidia/PowerServiceClient;-><init>()V
 
     iput-object v1, p0, Lcom/android/server/am/ActivityStack;->mPowerServiceClient:Lcom/nvidia/PowerServiceClient;
 
-    .line 443
     const-string v1, "power"
 
     invoke-virtual {p2, v1}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -11681,6 +11664,11 @@
     .locals 25
     .parameter "prev"
     .parameter "options"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework, modify for statusbar tansparentJun.Zhang@Plf.Framework, modify for three pointers"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1466
@@ -11724,6 +11712,18 @@
     .line 1478
     move-object/from16 v0, p0
 
+    iget-object v2, v0, Lcom/android/server/am/ActivityStack;->mOppoActivityStackHelper:Lcom/android/server/am/OppoActivityStackHelper;
+
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityStack;->mContext:Landroid/content/Context;
+
+    const/4 v4, 0x1
+
+    invoke-virtual {v2, v3, v4}, Lcom/android/server/am/OppoActivityStackHelper;->sendIsHomeModeIntent(Landroid/content/Context;Z)V
+
+    move-object/from16 v0, p0
+
     iget-object v2, v0, Lcom/android/server/am/ActivityStack;->mService:Lcom/android/server/am/ActivityManagerService;
 
     move-object/from16 v0, p0
@@ -11740,6 +11740,34 @@
 
     .line 1482
     :cond_0
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/server/am/ActivityStack;->mOppoActivityStackHelper:Lcom/android/server/am/OppoActivityStackHelper;
+
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityStack;->mContext:Landroid/content/Context;
+
+    move-object/from16 v0, p1
+
+    move-object/from16 v1, v20
+
+    invoke-virtual {v2, v3, v0, v1}, Lcom/android/server/am/OppoActivityStackHelper;->handleSendHomeMode(Landroid/content/Context;Lcom/android/server/am/ActivityRecord;Lcom/android/server/am/ActivityRecord;)V
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/server/am/ActivityStack;->mOppoActivityStackHelper:Lcom/android/server/am/OppoActivityStackHelper;
+
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityStack;->mContext:Landroid/content/Context;
+
+    move-object/from16 v0, p1
+
+    move-object/from16 v1, v20
+
+    invoke-virtual {v2, v3, v0, v1}, Lcom/android/server/am/OppoActivityStackHelper;->handleSendCameraMode(Landroid/content/Context;Lcom/android/server/am/ActivityRecord;Lcom/android/server/am/ActivityRecord;)V
+
     const/4 v2, 0x0
 
     move-object/from16 v0, v20
@@ -11848,22 +11876,18 @@
 
     invoke-virtual {v2}, Lcom/android/server/wm/WindowManagerService;->executeAppTransition()V
 
-    .line 1504
     move-object/from16 v0, p0
 
     iget-object v2, v0, Lcom/android/server/am/ActivityStack;->mNoAnimActivities:Ljava/util/ArrayList;
 
     invoke-virtual {v2}, Ljava/util/ArrayList;->clear()V
 
-    .line 1505
     invoke-static/range {p2 .. p2}, Landroid/app/ActivityOptions;->abort(Landroid/os/Bundle;)V
 
-    .line 1506
     const/4 v2, 0x0
 
-    goto :goto_0
+    goto/16 :goto_0
 
-    .line 1512
     :cond_4
     move-object/from16 v0, p0
 

@@ -4819,3 +4819,49 @@
     .restart local v25       #networkPolicy:Lcom/android/server/net/NetworkPolicyManagerService;
     goto/16 :goto_39
 .end method
+
+.method private initOppoExService(Landroid/content/Context;Lcom/android/server/wm/WindowManagerService;)V
+    .locals 4
+    .parameter "context"
+    .parameter "wm"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jun.Zhang@Plf.Framework, for start oppo ex service, three pointers move shot screen, Wanglan add for smali"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    :try_start_0
+    const-string v2, "SystemServer"
+
+    const-string v3, "Oppo Expand Service"
+
+    invoke-static {v2, v3}, Landroid/util/Slog;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    new-instance v1, Lcom/android/server/oppo/OppoExService;
+
+    invoke-direct {v1, p1, p2}, Lcom/android/server/oppo/OppoExService;-><init>(Landroid/content/Context;Lcom/android/server/wm/WindowManagerService;)V
+
+    .local v1, oppoExService:Lcom/android/server/oppo/OppoExService;
+    const-string v2, "OPPOExService"
+
+    invoke-static {v2, v1}, Landroid/os/ServiceManager;->addService(Ljava/lang/String;Landroid/os/IBinder;)V
+    :try_end_0
+    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+
+    .end local v1           #oppoExService:Lcom/android/server/oppo/OppoExService;
+    :goto_0
+    return-void
+
+    :catch_0
+    move-exception v0
+
+    .local v0, e:Ljava/lang/Throwable;
+    const-string v2, "SystemServer"
+
+    const-string v3, "Failure starting Oppo Service"
+
+    invoke-static {v2, v3, v0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+    goto :goto_0
+.end method

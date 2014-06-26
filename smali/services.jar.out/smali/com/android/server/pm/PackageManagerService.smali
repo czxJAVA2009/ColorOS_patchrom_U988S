@@ -535,6 +535,11 @@
     .parameter "installer"
     .parameter "factoryTest"
     .parameter "onlyCore"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK, add to load oppo-framework-resWangLan@Plf.Framework, modify for shareuid, store preset APK in /system/reserve, parse packages.xml to confirm its validity"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1003
@@ -849,6 +854,8 @@
     move-result-wide v3
 
     invoke-static {v2, v3, v4}, Landroid/util/EventLog;->writeEvent(IJ)I
+
+    invoke-static {}, Lcom/android/server/pm/OppoPackageManagerHelper;->ParsePackageXml()V
 
     .line 1007
     move-object/from16 v0, p0
@@ -1827,6 +1834,12 @@
     invoke-virtual {v0, v2}, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
 
     .line 1158
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, v24
+
+    invoke-direct {v0, v1}, Lcom/android/server/pm/PackageManagerService;->ignoreOppoFrameworkRes(Ljava/util/HashSet;)V
+
     move-object/from16 v0, p0
 
     iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mFrameworkDir:Ljava/io/File;
@@ -9700,6 +9713,11 @@
     .locals 25
     .parameter "pkg"
     .parameter "replace"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "wanglan modify for near id"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 5012
@@ -16398,6 +16416,11 @@
     .parameter "scanMode"
     .parameter "currentTime"
     .parameter "user"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "wanglan modify for unpacking the native lib for some SysApk whose lib is not under system/lib, add to avoid dex not found exception in eng mode,Jianhua.Lin@Plf.SDK : Add for start OppoResolverActivity instead of ResolverActivity"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 3861
@@ -16625,7 +16648,7 @@
 
     iget-object v3, v0, Lcom/android/server/pm/PackageManagerService;->mResolveActivity:Landroid/content/pm/ActivityInfo;
 
-    const-class v10, Lcom/android/internal/app/ResolverActivity;
+    const-class v10, Lcom/android/internal/app/OppoResolverActivity;
 
     invoke-virtual {v10}, Ljava/lang/Class;->getName()Ljava/lang/String;
 
@@ -18492,6 +18515,16 @@
 
     if-nez v3, :cond_35
 
+    move-object/from16 v0, p1
+
+    iget-object v3, v0, Landroid/content/pm/PackageParser$Package;->packageName:Ljava/lang/String;
+
+    invoke-static {v3}, Lcom/android/server/pm/OppoPackageManagerHelper;->IsForceUnpackNativeLibList(Ljava/lang/String;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_35
+
     .line 4330
     invoke-static/range {v34 .. v34}, Lcom/android/internal/content/NativeLibraryHelper;->removeNativeBinariesFromDirLI(Ljava/io/File;)Z
 
@@ -18537,12 +18570,21 @@
 
     iput-object v0, v1, Landroid/content/pm/PackageParser$Package;->mScanPath:Ljava/lang/String;
 
-    .line 4378
     and-int/lit8 v3, p3, 0x2
 
-    if-nez v3, :cond_3b
+    if-eqz v3, :cond_oppo_2
 
-    .line 4379
+    move-object/from16 v0, p1
+
+    iget-object v3, v0, Landroid/content/pm/PackageParser$Package;->packageName:Ljava/lang/String;
+
+    invoke-static {v3}, Lcom/android/server/pm/OppoPackageManagerHelper;->IsPredexOptList(Ljava/lang/String;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_3b
+
+    :cond_oppo_2
     move/from16 v0, p3
 
     and-int/lit16 v3, v0, 0x80
@@ -34698,6 +34740,11 @@
     .parameter "installerPackageName"
     .parameter "verificationParams"
     .parameter "encryptionParams"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "ZhiYong.Lin@Plf.Framework modify for apk encryption"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 5865
@@ -34732,18 +34779,19 @@
 
     if-nez v11, :cond_2
 
-    .line 5882
     :cond_0
     or-int/lit8 v5, p3, 0x20
 
-    .line 5887
     .local v5, filteredFlags:I
     :goto_1
     move-object/from16 v0, p5
 
     invoke-virtual {v0, v11}, Landroid/content/pm/VerificationParams;->setInstallerUid(I)V
 
-    .line 5889
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v1, p1}, Landroid/content/pm/OppoOpkParserUtil;->checkImeiForOpkByUri(Landroid/content/Context;Landroid/net/Uri;)V
+
     iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mHandler:Lcom/android/server/pm/PackageManagerService$PackageHandler;
 
     const/4 v2, 0x5
@@ -41141,5 +41189,55 @@
     invoke-virtual {v2, v0}, Lcom/android/server/pm/PackageManagerService$PackageHandler;->sendMessage(Landroid/os/Message;)Z
 
     .line 5948
+    return-void
+.end method
+
+.method private ignoreOppoFrameworkRes(Ljava/util/HashSet;)V
+    .locals 2
+    .parameter
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK,2013.10.05: to load oppo-framework-res"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/util/HashSet",
+            "<",
+            "Ljava/lang/String;",
+            ">;)V"
+        }
+    .end annotation
+
+    .prologue
+    .local p1, libFiles:Ljava/util/HashSet;,"Ljava/util/HashSet<Ljava/lang/String;>;"
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mFrameworkDir:Ljava/io/File;
+
+    invoke-virtual {v1}, Ljava/io/File;->getPath()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, "/oppo-framework-res.apk"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p1, v0}, Ljava/util/HashSet;->add(Ljava/lang/Object;)Z
+
     return-void
 .end method

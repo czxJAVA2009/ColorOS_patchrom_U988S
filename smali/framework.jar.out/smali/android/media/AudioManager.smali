@@ -228,6 +228,14 @@
 
 .field public static final STREAM_DTMF:I = 0x8
 
+.field public static final STREAM_FM:I = 0xa
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "add for OppoVolumePanel"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->QCOM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field public static final STREAM_MUSIC:I = 0x3
 
 .field public static final STREAM_NOTIFICATION:I = 0x5

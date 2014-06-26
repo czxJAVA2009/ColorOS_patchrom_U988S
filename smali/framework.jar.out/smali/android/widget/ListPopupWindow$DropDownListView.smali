@@ -177,10 +177,15 @@
     goto :goto_0
 .end method
 
-.method obtainView(I[Z)Landroid/view/View;
+.method public obtainView(I[Z)Landroid/view/View;
     .locals 3
     .parameter "position"
     .parameter "isScrap"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "default: merge oppolistview"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1196

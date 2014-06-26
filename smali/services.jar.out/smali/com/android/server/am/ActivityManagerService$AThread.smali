@@ -43,48 +43,41 @@
 # virtual methods
 .method public run()V
     .locals 3
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangyinxiang@Plf.Framework, modify for OppoActivityManagerService"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    .line 1473
     invoke-static {}, Landroid/os/Looper;->prepare()V
 
-    .line 1475
     const/4 v1, -0x2
 
     invoke-static {v1}, Landroid/os/Process;->setThreadPriority(I)V
 
-    .line 1477
     const/4 v1, 0x0
 
     invoke-static {v1}, Landroid/os/Process;->setCanSelfBackground(Z)V
 
-    .line 1479
-    new-instance v0, Lcom/android/server/am/ActivityManagerService;
+    new-instance v0, Lcom/android/server/am/OppoActivityManagerService;
 
-    const/4 v1, 0x0
+    invoke-direct {v0}, Lcom/android/server/am/OppoActivityManagerService;-><init>()V
 
-    invoke-direct {v0, v1}, Lcom/android/server/am/ActivityManagerService;-><init>(Lcom/android/server/am/ActivityManagerService$1;)V
-
-    .line 1481
     .local v0, m:Lcom/android/server/am/ActivityManagerService;
     monitor-enter p0
 
-    .line 1482
     :try_start_0
     iput-object v0, p0, Lcom/android/server/am/ActivityManagerService$AThread;->mService:Lcom/android/server/am/ActivityManagerService;
 
-    .line 1483
     invoke-virtual {p0}, Ljava/lang/Object;->notifyAll()V
 
-    .line 1484
     monitor-exit p0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 1486
     monitor-enter p0
 
-    .line 1487
     :goto_0
     :try_start_1
     iget-boolean v1, p0, Lcom/android/server/am/ActivityManagerService$AThread;->mReady:Z

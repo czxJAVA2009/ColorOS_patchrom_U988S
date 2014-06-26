@@ -34,6 +34,8 @@
 
 .field static final TRANSACTION_dispatchGetNewSurface:I = 0x5
 
+.field static final TRANSACTION_dispatchPositionChanged:I = 0xe
+
 .field static final TRANSACTION_dispatchScreenState:I = 0x6
 
 .field static final TRANSACTION_dispatchSystemUiVisibilityChanged:I = 0xc
@@ -744,12 +746,29 @@
 
     invoke-virtual {p2, v0}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
-    .line 223
     invoke-virtual {p0}, Landroid/view/IWindow$Stub;->doneAnimating()V
 
     goto/16 :goto_0
 
-    .line 44
+    :sswitch_e
+    const-string v0, "android.view.IWindow"
+
+    invoke-virtual {p2, v0}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v1
+
+    .restart local v1       #_arg0:I
+    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v2
+
+    .restart local v2       #_arg1:I
+    invoke-virtual {p0, v1, v2}, Landroid/view/IWindow$Stub;->dispatchPositionChanged(II)V
+
+    goto/16 :goto_0
+
     :sswitch_data_0
     .sparse-switch
         0x1 -> :sswitch_1
@@ -765,6 +784,7 @@
         0xb -> :sswitch_b
         0xc -> :sswitch_c
         0xd -> :sswitch_d
+        0xe -> :sswitch_e
         0x5f4e5446 -> :sswitch_0
     .end sparse-switch
 .end method

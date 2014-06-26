@@ -46,3 +46,11 @@
 
 .method public abstract switchKeyboardLayout(II)V
 .end method
+
+.method public abstract reboot()V
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "yaolang@Plf.Framework, add for oppo global actions"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end method

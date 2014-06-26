@@ -67,6 +67,14 @@
 
 .field final userId:I
 
+.field final userId:I
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK,2014.03.04 :add for QCOM and MTK with Google source code differences "
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->QCOM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field willBeHidden:Z
 
 
@@ -90,6 +98,10 @@
     const/4 v2, 0x1
 
     invoke-direct {p0, p1, v0, v1, v2}, Lcom/android/server/wm/WindowToken;-><init>(Lcom/android/server/wm/WindowManagerService;Landroid/os/IBinder;IZ)V
+
+    const/4 v0, 0x0
+
+    iput v0, p0, Lcom/android/server/wm/AppWindowToken;->userId:I
 
     .line 47
     new-instance v0, Ljava/util/ArrayList;

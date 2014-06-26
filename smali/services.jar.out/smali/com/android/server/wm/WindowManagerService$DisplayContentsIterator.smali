@@ -59,7 +59,7 @@
     iget-object v1, p0, Lcom/android/server/wm/WindowManagerService$DisplayContentsIterator;->this$0:Lcom/android/server/wm/WindowManagerService;
 
     #getter for: Lcom/android/server/wm/WindowManagerService;->mDisplayContents:Landroid/util/SparseArray;
-    invoke-static {v1}, Lcom/android/server/wm/WindowManagerService;->access$2400(Lcom/android/server/wm/WindowManagerService;)Landroid/util/SparseArray;
+    invoke-static {v1}, Lcom/android/server/wm/WindowManagerService;->access$2300(Lcom/android/server/wm/WindowManagerService;)Landroid/util/SparseArray;
 
     move-result-object v1
 
@@ -95,7 +95,7 @@
     iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$DisplayContentsIterator;->this$0:Lcom/android/server/wm/WindowManagerService;
 
     #getter for: Lcom/android/server/wm/WindowManagerService;->mDisplayContents:Landroid/util/SparseArray;
-    invoke-static {v0}, Lcom/android/server/wm/WindowManagerService;->access$2400(Lcom/android/server/wm/WindowManagerService;)Landroid/util/SparseArray;
+    invoke-static {v0}, Lcom/android/server/wm/WindowManagerService;->access$2300(Lcom/android/server/wm/WindowManagerService;)Landroid/util/SparseArray;
 
     move-result-object v0
 

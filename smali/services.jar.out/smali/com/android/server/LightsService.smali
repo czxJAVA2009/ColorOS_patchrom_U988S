@@ -67,60 +67,49 @@
     .prologue
     const/16 v4, 0x9
 
-    .line 193
     invoke-direct/range {p0 .. p0}, Ljava/lang/Object;-><init>()V
 
-    .line 62
     new-array v1, v4, [Lcom/android/server/LightsService$Light;
 
     iput-object v1, p0, Lcom/android/server/LightsService;->mLights:[Lcom/android/server/LightsService$Light;
 
-    .line 158
     new-instance v1, Lcom/android/server/LightsService$1;
 
     invoke-direct {v1, p0}, Lcom/android/server/LightsService$1;-><init>(Lcom/android/server/LightsService;)V
 
     iput-object v1, p0, Lcom/android/server/LightsService;->mLegacyFlashlightHack:Landroid/os/IHardwareService$Stub;
 
-    .line 214
     new-instance v1, Lcom/android/server/LightsService$2;
 
     invoke-direct {v1, p0}, Lcom/android/server/LightsService$2;-><init>(Lcom/android/server/LightsService;)V
 
     iput-object v1, p0, Lcom/android/server/LightsService;->mH:Landroid/os/Handler;
 
-    .line 195
     invoke-static {}, Lcom/android/server/LightsService;->init_native()I
 
     move-result v1
 
     iput v1, p0, Lcom/android/server/LightsService;->mNativePointer:I
 
-    .line 196
     iput-object p1, p0, Lcom/android/server/LightsService;->mContext:Landroid/content/Context;
 
-    .line 198
     const-string v1, "hardware"
 
     iget-object v2, p0, Lcom/android/server/LightsService;->mLegacyFlashlightHack:Landroid/os/IHardwareService$Stub;
 
     invoke-static {v1, v2}, Landroid/os/ServiceManager;->addService(Ljava/lang/String;Landroid/os/IBinder;)V
 
-    .line 200
     const/4 v0, 0x0
 
     .local v0, i:I
     :goto_0
-    if-ge v0, v4, :cond_0
+    if-ge v0, v3, :cond_0
 
-    .line 201
     iget-object v1, p0, Lcom/android/server/LightsService;->mLights:[Lcom/android/server/LightsService$Light;
 
     new-instance v2, Lcom/android/server/LightsService$Light;
 
-    const/4 v3, 0x0
-
-    invoke-direct {v2, p0, v0, v3}, Lcom/android/server/LightsService$Light;-><init>(Lcom/android/server/LightsService;ILcom/android/server/LightsService$1;)V
+    invoke-direct {v2, p0, v0}, Lcom/android/server/LightsService$Light;-><init>(Lcom/android/server/LightsService;I)V
 
     aput-object v2, v1, v0
 

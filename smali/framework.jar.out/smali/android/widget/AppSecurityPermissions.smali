@@ -507,24 +507,26 @@
 
     iput-object v2, p0, Landroid/widget/AppSecurityPermissions;->mPm:Landroid/content/pm/PackageManager;
 
-    .line 239
     invoke-direct {p0}, Landroid/widget/AppSecurityPermissions;->loadResources()V
 
-    .line 240
     new-instance v2, Landroid/widget/AppSecurityPermissions$PermissionInfoComparator;
 
     invoke-direct {v2}, Landroid/widget/AppSecurityPermissions$PermissionInfoComparator;-><init>()V
 
     iput-object v2, p0, Landroid/widget/AppSecurityPermissions;->mPermComparator:Landroid/widget/AppSecurityPermissions$PermissionInfoComparator;
 
-    .line 241
     new-instance v2, Landroid/widget/AppSecurityPermissions$PermissionGroupInfoComparator;
 
     invoke-direct {v2}, Landroid/widget/AppSecurityPermissions$PermissionGroupInfoComparator;-><init>()V
 
     iput-object v2, p0, Landroid/widget/AppSecurityPermissions;->mPermGroupComparator:Landroid/widget/AppSecurityPermissions$PermissionGroupInfoComparator;
 
-    .line 242
+    new-instance v2, Ljava/util/ArrayList;
+
+    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+
+    iput-object v2, p0, Landroid/widget/AppSecurityPermissions;->mPermsList:Ljava/util/List;
+
     invoke-interface {p2}, Ljava/util/List;->iterator()Ljava/util/Iterator;
 
     move-result-object v0

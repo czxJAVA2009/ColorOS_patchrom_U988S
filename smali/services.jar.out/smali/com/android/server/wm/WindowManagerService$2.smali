@@ -78,15 +78,14 @@
 
 # virtual methods
 .method public run()V
-    .locals 12
+    .locals 11
 
     .prologue
-    .line 775
-    iget-object v10, p0, Lcom/android/server/wm/WindowManagerService$2;->val$holder:[Lcom/android/server/wm/WindowManagerService;
+    iget-object v9, p0, Lcom/android/server/wm/WindowManagerService$2;->val$holder:[Lcom/android/server/wm/WindowManagerService;
 
-    const/4 v11, 0x0
+    const/4 v10, 0x0
 
-    new-instance v0, Lcom/android/server/wm/WindowManagerService;
+    new-instance v0, Lcom/android/server/wm/OppoWindowManagerService;
 
     iget-object v1, p0, Lcom/android/server/wm/WindowManagerService$2;->val$context:Landroid/content/Context;
 
@@ -104,11 +103,9 @@
 
     iget-boolean v8, p0, Lcom/android/server/wm/WindowManagerService$2;->val$onlyCore:Z
 
-    const/4 v9, 0x0
+    invoke-direct/range {v0 .. v8}, Lcom/android/server/wm/OppoWindowManagerService;-><init>(Landroid/content/Context;Lcom/android/server/power/PowerManagerService;Lcom/android/server/display/DisplayManagerService;Lcom/android/server/input/InputManagerService;Landroid/os/Handler;ZZZ)V
 
-    invoke-direct/range {v0 .. v9}, Lcom/android/server/wm/WindowManagerService;-><init>(Landroid/content/Context;Lcom/android/server/power/PowerManagerService;Lcom/android/server/display/DisplayManagerService;Lcom/android/server/input/InputManagerService;Landroid/os/Handler;ZZZLcom/android/server/wm/WindowManagerService$1;)V
-
-    aput-object v0, v10, v11
+    aput-object v0, v9, v10
 
     .line 777
     return-void

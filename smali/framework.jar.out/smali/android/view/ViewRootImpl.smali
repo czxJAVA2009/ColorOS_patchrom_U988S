@@ -93,9 +93,21 @@
 
 .field private static final MSG_DISPATCH_GET_NEW_SURFACE:I = 0x9
 
-.field private static final MSG_DISPATCH_KEY:I = 0x7
+.field public static final MSG_DISPATCH_KEY:I = 0x7
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05:[-private+public] modify for OppoPasswordEntryKeyboardHelper"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
-.field private static final MSG_DISPATCH_KEY_FROM_IME:I = 0xb
+.field public static final MSG_DISPATCH_KEY_FROM_IME:I = 0xb
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05:[-private+public] modify for OppoPasswordEntryKeyboardHelper"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field private static final MSG_DISPATCH_SCREEN_STATE:I = 0x14
 
@@ -3848,6 +3860,11 @@
 .method private deliverPointerEvent(Landroid/view/ViewRootImpl$QueuedInputEvent;)V
     .locals 8
     .parameter "q"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jun.Zhang@Plf.Framework, add for three pointers move shot screen"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v7, 0x1
@@ -3893,18 +3910,13 @@
 
     if-nez v4, :cond_3
 
-    .line 3702
     :cond_1
     invoke-direct {p0, p1, v6}, Landroid/view/ViewRootImpl;->finishInputEvent(Landroid/view/ViewRootImpl$QueuedInputEvent;Z)V
 
-    .line 3705
     invoke-direct {p0, v1}, Landroid/view/ViewRootImpl;->pointerDefaultProcessBySmartPower(Landroid/view/MotionEvent;)V
 
-    .line 3755
-    :goto_1
-    return-void
+    goto :goto_oppo_1
 
-    .line 3696
     :cond_2
     iget-object v4, p0, Landroid/view/ViewRootImpl;->mInputEventConsistencyVerifier:Landroid/view/InputEventConsistencyVerifier;
 
@@ -3986,23 +3998,19 @@
 
     move-result v2
 
-    .line 3745
     .local v2, handled:Z
     invoke-direct {p0, v1}, Landroid/view/ViewRootImpl;->pointerDefaultProcessBySmartPower(Landroid/view/MotionEvent;)V
 
-    .line 3748
     if-eqz v2, :cond_9
 
-    .line 3749
     invoke-direct {p0, p1, v7}, Landroid/view/ViewRootImpl;->finishInputEvent(Landroid/view/ViewRootImpl$QueuedInputEvent;Z)V
 
-    goto :goto_1
+    goto :goto_oppo_1
 
-    .line 3754
     :cond_9
     invoke-direct {p0, p1, v6}, Landroid/view/ViewRootImpl;->finishInputEvent(Landroid/view/ViewRootImpl$QueuedInputEvent;Z)V
 
-    goto :goto_1
+    goto :goto_oppo_1
 .end method
 
 .method private deliverTrackballEvent(Landroid/view/ViewRootImpl$QueuedInputEvent;)V
@@ -5697,7 +5705,7 @@
     :try_start_4
     invoke-virtual {p1, v1}, Landroid/view/Surface;->unlockCanvasAndPost(Landroid/graphics/Canvas;)V
     :try_end_4
-    .catch Ljava/lang/IllegalArgumentException; {:try_start_4 .. :try_end_4} :catch_2
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_4 .. :try_end_4} :catch_3
 
     move v6, v7
 
@@ -5805,24 +5813,19 @@
     :try_end_6
     .catchall {:try_start_6 .. :try_end_6} :catchall_1
 
-    .line 2797
     :catchall_1
     move-exception v8
 
-    .line 2798
     :try_start_7
     invoke-virtual {p1, v1}, Landroid/view/Surface;->unlockCanvasAndPost(Landroid/graphics/Canvas;)V
     :try_end_7
-    .catch Ljava/lang/IllegalArgumentException; {:try_start_7 .. :try_end_7} :catch_3
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_7 .. :try_end_7} :catch_2
 
-    .line 2803
     throw v8
 
-    .line 2799
     :catch_2
     move-exception v2
 
-    .line 2800
     .restart local v2       #e:Ljava/lang/IllegalArgumentException;
     const-string v8, "ViewRootImpl"
 
@@ -5830,17 +5833,15 @@
 
     invoke-static {v8, v9, v2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    .line 2801
+    :goto_3
     iput-boolean v7, p0, Landroid/view/ViewRootImpl;->mLayoutRequested:Z
 
     goto/16 :goto_0
 
-    .line 2799
     .end local v2           #e:Ljava/lang/IllegalArgumentException;
     :catch_3
     move-exception v2
 
-    .line 2800
     .restart local v2       #e:Ljava/lang/IllegalArgumentException;
     const-string v8, "ViewRootImpl"
 
@@ -5848,12 +5849,8 @@
 
     invoke-static {v8, v9, v2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    .line 2801
-    iput-boolean v7, p0, Landroid/view/ViewRootImpl;->mLayoutRequested:Z
+    goto :goto_3
 
-    goto/16 :goto_0
-
-    .line 2736
     .end local v0           #bottom:I
     .end local v1           #canvas:Landroid/graphics/Canvas;
     .end local v3           #left:I
@@ -17722,6 +17719,8 @@
     .catch Ljava/lang/IllegalStateException; {:try_start_1 .. :try_end_1} :catch_0
 
     goto :goto_0
+
+    nop
 
     .line 4526
     :pswitch_data_0

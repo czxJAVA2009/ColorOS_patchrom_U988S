@@ -92,11 +92,23 @@
 
 .field private mTitle:Ljava/lang/CharSequence;
 
-.field private mTitleLayout:Landroid/widget/LinearLayout;
+.field mTitleLayout:Landroid/widget/LinearLayout;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05: [-private]Modify for oppoStyle ActionBarTitle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field private mTitleStyleRes:I
 
-.field private mTitleUpView:Landroid/view/View;
+.field mTitleUpView:Landroid/view/View;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05:[-private]Modify for oppoStyle ActionBarTitle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field private mTitleView:Landroid/widget/TextView;
 
@@ -1063,9 +1075,14 @@
 
 .method private initTitle()V
     .locals 10
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05: Modify for oppoStyle ActionBarTitle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    const/16 v7, 0x8
+    const/16 v9, 0x8
 
     const/4 v5, 0x1
 
@@ -1100,9 +1117,9 @@
     .line 823
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
 
-    const v8, 0x102024d
+    const v7, 0x102024d
 
-    invoke-virtual {v4, v8}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
+    invoke-virtual {v4, v7}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
 
     move-result-object v4
 
@@ -1113,9 +1130,9 @@
     .line 824
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
 
-    const v8, 0x102024e
+    const v7, 0x102024e
 
-    invoke-virtual {v4, v8}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
+    invoke-virtual {v4, v7}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
 
     move-result-object v4
 
@@ -1126,9 +1143,9 @@
     .line 825
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
 
-    const v8, 0x1020246
+    const v7, 0x1020246
 
-    invoke-virtual {v4, v8}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
+    invoke-virtual {v4, v7}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
 
     move-result-object v4
 
@@ -1148,26 +1165,22 @@
 
     invoke-virtual {v4, v8, v9}, Landroid/widget/TextView;->setTextAppearance(Landroid/content/Context;I)V
 
-    .line 830
     :cond_0
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitle:Ljava/lang/CharSequence;
 
     if-eqz v4, :cond_1
 
-    .line 831
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleView:Landroid/widget/TextView;
 
-    iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mTitle:Ljava/lang/CharSequence;
+    iget-object v7, p0, Lcom/android/internal/widget/ActionBarView;->mTitle:Ljava/lang/CharSequence;
 
-    invoke-virtual {v4, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    invoke-virtual {v4, v7}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 834
     :cond_1
     iget v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleStyleRes:I
 
     if-eqz v4, :cond_2
 
-    .line 835
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleView:Landroid/widget/TextView;
 
     iget-object v8, p0, Landroid/view/View;->mContext:Landroid/content/Context;
@@ -1176,25 +1189,21 @@
 
     invoke-virtual {v4, v8, v9}, Landroid/widget/TextView;->setTextAppearance(Landroid/content/Context;I)V
 
-    .line 837
     :cond_2
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitle:Ljava/lang/CharSequence;
 
     if-eqz v4, :cond_3
 
-    .line 838
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleView:Landroid/widget/TextView;
 
-    iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitle:Ljava/lang/CharSequence;
+    iget-object v7, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitle:Ljava/lang/CharSequence;
 
-    invoke-virtual {v4, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    invoke-virtual {v4, v7}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 839
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleView:Landroid/widget/TextView;
 
     invoke-virtual {v4, v6}, Landroid/widget/TextView;->setVisibility(I)V
 
-    .line 842
     :cond_3
     iget v4, p0, Lcom/android/internal/widget/ActionBarView;->mDisplayOptions:I
 
@@ -1267,13 +1276,11 @@
 
     if-eqz v4, :cond_6
 
-    .line 852
     :cond_5
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
 
-    invoke-virtual {v4, v7}, Landroid/widget/LinearLayout;->setVisibility(I)V
+    invoke-virtual {v4, v9}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 854
     :cond_6
     return-void
 
@@ -4920,6 +4927,11 @@
 .method public setDisplayOptions(I)V
     .locals 12
     .parameter "options"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05:Modify for oppoStyle ActionBarTitle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/16 v7, 0x8
@@ -6353,4 +6365,111 @@
     const/4 v0, 0x0
 
     return v0
+.end method
+
+.method static synthetic access$1000(Lcom/android/internal/widget/ActionBarView;)Landroid/view/View;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mCustomNavView:Landroid/view/View;
+
+    return-object v0
+.end method
+
+.method static synthetic access$1100(Lcom/android/internal/widget/ActionBarView;)I
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget v0, p0, Lcom/android/internal/widget/ActionBarView;->mDisplayOptions:I
+
+    return v0
+.end method
+
+.method static synthetic access$1200(Lcom/android/internal/widget/ActionBarView;)V
+    .locals 0
+    .parameter "x0"
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/widget/ActionBarView;->initTitle()V
+
+    return-void
+.end method
+
+.method static synthetic access$1300(Lcom/android/internal/widget/ActionBarView;)I
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget v0, p0, Lcom/android/internal/widget/ActionBarView;->mNavigationMode:I
+
+    return v0
+.end method
+
+.method static synthetic access$800(Lcom/android/internal/widget/ActionBarView;)Lcom/android/internal/widget/ScrollingTabContainerView;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mTabScrollView:Lcom/android/internal/widget/ScrollingTabContainerView;
+
+    return-object v0
+.end method
+
+.method static synthetic access$900(Lcom/android/internal/widget/ActionBarView;)Landroid/widget/Spinner;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mSpinner:Landroid/widget/Spinner;
+
+    return-object v0
+.end method
+
+.method hookSetTitleItem(ZZ)V
+    .locals 2
+    .parameter "showHome"
+    .parameter "homeAsUp"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK.2013.07.29:Add for oppoStyle ActionBarTitle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iget-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mTitleUpView:Landroid/view/View;
+
+    if-nez p1, :cond_1
+
+    if-eqz p2, :cond_0
+
+    const/4 v0, 0x0
+
+    :goto_0
+    invoke-virtual {v1, v0}, Landroid/view/View;->setVisibility(I)V
+
+    return-void
+
+    :cond_0
+    const/4 v0, 0x4
+
+    goto :goto_0
+
+    :cond_1
+    const/16 v0, 0x8
+
+    goto :goto_0
+.end method
+
+.method setTitleItem(ZZI)V
+    .locals 0
+    .parameter "showHome"
+    .parameter "homeAsUp"
+    .parameter "vis"
+
+    .prologue
+    invoke-virtual {p0, p1, p2}, Lcom/android/internal/widget/ActionBarView;->hookSetTitleItem(ZZ)V
+
+    return-void
 .end method

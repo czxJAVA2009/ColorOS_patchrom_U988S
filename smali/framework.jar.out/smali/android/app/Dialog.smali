@@ -12,6 +12,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Landroid/app/Dialog$Injector;,
         Landroid/app/Dialog$ListenersHandler;
     }
 .end annotation
@@ -35,6 +36,8 @@
 .field private mActionBar:Lcom/android/internal/app/ActionBarImpl;
 
 .field private mActionMode:Landroid/view/ActionMode;
+
+.field private mButtonFlag:I
 
 .field private mCancelAndDismissTaken:Ljava/lang/String;
 
@@ -116,47 +119,38 @@
 
     const/4 v2, 0x0
 
-    .line 150
     invoke-direct/range {p0 .. p0}, Ljava/lang/Object;-><init>()V
 
-    .line 94
     iput-boolean v4, p0, Landroid/app/Dialog;->mCancelable:Z
 
-    .line 103
     iput-boolean v2, p0, Landroid/app/Dialog;->mCreated:Z
 
-    .line 104
     iput-boolean v2, p0, Landroid/app/Dialog;->mShowing:Z
 
-    .line 105
     iput-boolean v2, p0, Landroid/app/Dialog;->mCanceled:Z
 
-    .line 107
     new-instance v2, Landroid/os/Handler;
 
     invoke-direct {v2}, Landroid/os/Handler;-><init>()V
 
     iput-object v2, p0, Landroid/app/Dialog;->mHandler:Landroid/os/Handler;
 
-    .line 117
+    iput v3, p0, Landroid/app/Dialog;->mButtonFlag:I
+
     new-instance v2, Landroid/app/Dialog$1;
 
     invoke-direct {v2, p0}, Landroid/app/Dialog$1;-><init>(Landroid/app/Dialog;)V
 
     iput-object v2, p0, Landroid/app/Dialog;->mDismissAction:Ljava/lang/Runnable;
 
-    .line 151
     if-eqz p3, :cond_1
 
-    .line 152
     if-nez p2, :cond_0
 
-    .line 153
     new-instance v0, Landroid/util/TypedValue;
 
     invoke-direct {v0}, Landroid/util/TypedValue;-><init>()V
 
-    .line 154
     .local v0, outValue:Landroid/util/TypedValue;
     invoke-virtual {p1}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
 
@@ -2231,6 +2225,11 @@
 
 .method public show()V
     .locals 5
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK : Modify for ActionBar of oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v4, 0x0
@@ -2256,41 +2255,37 @@
 
     if-eqz v2, :cond_0
 
-    .line 250
     iget-object v2, p0, Landroid/app/Dialog;->mWindow:Landroid/view/Window;
 
     invoke-virtual {v2, v3}, Landroid/view/Window;->invalidatePanelMenu(I)V
 
-    .line 252
     :cond_0
     iget-object v2, p0, Landroid/app/Dialog;->mDecor:Landroid/view/View;
 
     invoke-virtual {v2, v4}, Landroid/view/View;->setVisibility(I)V
 
-    .line 287
     :cond_1
     :goto_0
     return-void
 
-    .line 257
     :cond_2
     iput-boolean v4, p0, Landroid/app/Dialog;->mCanceled:Z
 
-    .line 259
     iget-boolean v2, p0, Landroid/app/Dialog;->mCreated:Z
 
     if-nez v2, :cond_3
 
-    .line 260
     const/4 v2, 0x0
 
     invoke-virtual {p0, v2}, Landroid/app/Dialog;->dispatchOnCreate(Landroid/os/Bundle;)V
 
-    .line 263
     :cond_3
+    iget v2, p0, Landroid/app/Dialog;->mButtonFlag:I
+
+    invoke-static {p0, v2}, Landroid/app/Dialog$Injector;->initButtonBackground(Landroid/app/Dialog;I)V
+
     invoke-virtual {p0}, Landroid/app/Dialog;->onStart()V
 
-    .line 264
     iget-object v2, p0, Landroid/app/Dialog;->mWindow:Landroid/view/Window;
 
     invoke-virtual {v2}, Landroid/view/Window;->getDecorView()Landroid/view/View;
@@ -2312,14 +2307,12 @@
 
     if-eqz v2, :cond_4
 
-    .line 267
-    new-instance v2, Lcom/android/internal/app/ActionBarImpl;
+    invoke-static {p0}, Lcom/android/internal/app/OppoActionBarImpl;->newInstance(Landroid/app/Dialog;)Lcom/android/internal/app/ActionBarImpl;
 
-    invoke-direct {v2, p0}, Lcom/android/internal/app/ActionBarImpl;-><init>(Landroid/app/Dialog;)V
+    move-result-object v2
 
     iput-object v2, p0, Landroid/app/Dialog;->mActionBar:Lcom/android/internal/app/ActionBarImpl;
 
-    .line 270
     :cond_4
     iget-object v2, p0, Landroid/app/Dialog;->mWindow:Landroid/view/Window;
 
@@ -2458,5 +2451,20 @@
     invoke-virtual {p1, v0}, Landroid/view/View;->setOnCreateContextMenuListener(Landroid/view/View$OnCreateContextMenuListener;)V
 
     .line 923
+    return-void
+.end method
+
+.method public setFousedButton(I)V
+    .locals 0
+    .parameter "flag"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK : Add for Oppo Theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iput p1, p0, Landroid/app/Dialog;->mButtonFlag:I
+
     return-void
 .end method

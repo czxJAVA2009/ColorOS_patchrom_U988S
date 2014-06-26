@@ -261,6 +261,11 @@
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 6
     .parameter "context"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jun.Zhang@Plf.Framework,  init,alarm filter packageZhiYong.Lin@Plf.Framework, modify for align alarm time"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v5, 0x0
@@ -509,23 +514,21 @@
 
     sput-object v2, Lcom/android/server/AlarmManagerService;->appList_Alignment:Ljava/util/ArrayList;
 
-    .line 239
     iget v2, p0, Lcom/android/server/AlarmManagerService;->mDescriptor:I
 
     const/4 v3, -0x1
 
     if-eq v2, v3, :cond_1
 
-    .line 240
     iget-object v2, p0, Lcom/android/server/AlarmManagerService;->mWaitThread:Lcom/android/server/AlarmManagerService$AlarmThread;
 
     invoke-virtual {v2}, Lcom/android/server/AlarmManagerService$AlarmThread;->start()V
 
-    .line 244
     :goto_0
+    invoke-static {p1}, Lcom/android/server/OppoAlarmManagerHelper;->init(Landroid/content/Context;)V
+
     return-void
 
-    .line 242
     :cond_1
     const-string v2, "AlarmManager"
 

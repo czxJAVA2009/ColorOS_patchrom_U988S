@@ -920,6 +920,11 @@
 
 .method private sendTetherStateChangedBroadcast()V
     .locals 16
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Congwei.Yan@Plf.CommSrv,2013.10.11:modify for replace tethering icon"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 386

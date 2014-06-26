@@ -3875,12 +3875,16 @@
 .method public final getLineDirections(I)Landroid/text/Layout$Directions;
     .locals 1
     .parameter "line"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.08.16:Modify for OppoStaticLayout"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    .line 883
-    iget-object v0, p0, Landroid/text/StaticLayout;->mLineDirections:[Landroid/text/Layout$Directions;
+    invoke-virtual {p0, p1}, Landroid/text/StaticLayout;->getOppoHookLineDirections(I)Landroid/text/Layout$Directions;
 
-    aget-object v0, v0, p1
+    move-result-object v0
 
     return-object v0
 .end method
@@ -3890,18 +3894,14 @@
     .parameter "vertical"
 
     .prologue
-    .line 822
     iget v1, p0, Landroid/text/StaticLayout;->mLineCount:I
 
-    .line 823
     .local v1, high:I
     const/4 v3, -0x1
 
-    .line 825
     .local v3, low:I
     iget-object v2, p0, Landroid/text/StaticLayout;->mLines:[I
 
-    .line 826
     .local v2, lines:[I
     :goto_0
     sub-int v4, v1, v3
@@ -3910,12 +3910,10 @@
 
     if-le v4, v5, :cond_1
 
-    .line 827
     add-int v4, v1, v3
 
     shr-int/lit8 v0, v4, 0x1
 
-    .line 828
     .local v0, guess:I
     iget v4, p0, Landroid/text/StaticLayout;->mColumns:I
 
@@ -3927,26 +3925,21 @@
 
     if-le v4, p1, :cond_0
 
-    .line 829
     move v1, v0
 
     goto :goto_0
 
-    .line 831
     :cond_0
     move v3, v0
 
     goto :goto_0
 
-    .line 834
     .end local v0           #guess:I
     :cond_1
     if-gez v3, :cond_2
 
-    .line 835
     const/4 v3, 0x0
 
-    .line 837
     .end local v3           #low:I
     :cond_2
     return v3
@@ -3957,7 +3950,6 @@
     .parameter "line"
 
     .prologue
-    .line 868
     iget-object v0, p0, Landroid/text/StaticLayout;->mLines:[I
 
     iget v1, p0, Landroid/text/StaticLayout;->mColumns:I
@@ -3980,7 +3972,6 @@
     .parameter "line"
 
     .prologue
-    .line 848
     iget-object v1, p0, Landroid/text/StaticLayout;->mLines:[I
 
     iget v2, p0, Landroid/text/StaticLayout;->mColumns:I
@@ -3991,7 +3982,6 @@
 
     aget v0, v1, v2
 
-    .line 849
     .local v0, top:I
     iget v1, p0, Landroid/text/StaticLayout;->mMaximumVisibleLineCount:I
 
@@ -4005,14 +3995,12 @@
 
     if-eq p1, v1, :cond_0
 
-    .line 851
     invoke-virtual {p0}, Landroid/text/StaticLayout;->getBottomPadding()I
 
     move-result v1
 
     add-int/2addr v0, v1
 
-    .line 853
     :cond_0
     return v0
 .end method
@@ -4022,7 +4010,6 @@
     .parameter "line"
 
     .prologue
-    .line 873
     iget-object v0, p0, Landroid/text/StaticLayout;->mLines:[I
 
     iget v1, p0, Landroid/text/StaticLayout;->mColumns:I
@@ -4042,7 +4029,6 @@
     .locals 1
 
     .prologue
-    .line 888
     iget v0, p0, Landroid/text/StaticLayout;->mTopPadding:I
 
     return v0
@@ -4052,13 +4038,53 @@
     .locals 1
 
     .prologue
-    .line 920
     invoke-static {}, Landroid/text/MeasuredText;->obtain()Landroid/text/MeasuredText;
 
     move-result-object v0
 
     iput-object v0, p0, Landroid/text/StaticLayout;->mMeasured:Landroid/text/MeasuredText;
 
-    .line 921
+    return-void
+.end method
+
+.method public getOppoHookLineDirections(I)Landroid/text/Layout$Directions;
+    .locals 1
+    .parameter "line"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.10.07: Add for OppoStaticLayout"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    .line 883
+    iget-object v0, p0, Landroid/text/StaticLayout;->mLineDirections:[Landroid/text/Layout$Directions;
+
+    aget-object v0, v0, p1
+
+    return-object v0
+.end method
+
+.method oppoGenerate(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/TextDirectionHeuristic;FFZZFLandroid/text/TextUtils$TruncateAt;)V
+    .locals 0
+    .parameter "source"
+    .parameter "bufStart"
+    .parameter "bufEnd"
+    .parameter "paint"
+    .parameter "outerWidth"
+    .parameter "textDir"
+    .parameter "spacingmult"
+    .parameter "spacingadd"
+    .parameter "includepad"
+    .parameter "trackpad"
+    .parameter "ellipsizedWidth"
+    .parameter "ellipsize"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.10.07: Add for OppoStaticLayout"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
     return-void
 .end method

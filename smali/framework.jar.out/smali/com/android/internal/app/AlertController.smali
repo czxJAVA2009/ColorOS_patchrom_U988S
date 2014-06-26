@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/internal/app/AlertController$Injector;,
         Lcom/android/internal/app/AlertController$AlertParams;,
         Lcom/android/internal/app/AlertController$RecycleListView;,
         Lcom/android/internal/app/AlertController$ButtonHandler;
@@ -97,6 +98,11 @@
     .parameter "context"
     .parameter "di"
     .parameter "window"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK : Modify for Change the display position of dialog"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v4, 0x0
@@ -1941,6 +1947,11 @@
 
 .method public installContent()V
     .locals 3
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK : Modify for Change the display position of dialog"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/high16 v2, 0x2
@@ -1979,10 +1990,14 @@
 
     invoke-virtual {v0, v1}, Landroid/view/Window;->setContentView(I)V
 
-    .line 241
     invoke-direct {p0}, Lcom/android/internal/app/AlertController;->setupView()V
 
-    .line 242
+    iget-object v0, p0, Lcom/android/internal/app/AlertController;->mContext:Landroid/content/Context;
+
+    iget-object v1, p0, Lcom/android/internal/app/AlertController;->mWindow:Landroid/view/Window;
+
+    invoke-static {p0, v0, v1}, Lcom/android/internal/app/AlertController$Injector;->setDialogListener(Lcom/android/internal/app/AlertController;Landroid/content/Context;Landroid/view/Window;)V
+
     return-void
 .end method
 
@@ -2303,5 +2318,38 @@
     iput p5, p0, Lcom/android/internal/app/AlertController;->mViewSpacingBottom:I
 
     .line 284
+    return-void
+.end method
+
+.method public initializeDialog()V
+    .locals 3
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK : Modify for Change the display position of dialog"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iget-object v1, p0, Lcom/android/internal/app/AlertController;->mWindow:Landroid/view/Window;
+
+    iget v2, p0, Lcom/android/internal/app/AlertController;->mAlertDialogLayout:I
+
+    invoke-virtual {v1, v2}, Landroid/view/Window;->setContentView(I)V
+
+    invoke-direct {p0}, Lcom/android/internal/app/AlertController;->setupView()V
+
+    new-instance v0, Lcom/oppo/util/OppoDialogUtil;
+
+    iget-object v1, p0, Lcom/android/internal/app/AlertController;->mContext:Landroid/content/Context;
+
+    invoke-direct {v0, v1}, Lcom/oppo/util/OppoDialogUtil;-><init>(Landroid/content/Context;)V
+
+    .local v0, dialogUtil:Lcom/oppo/util/OppoDialogUtil;
+    iget-object v1, p0, Lcom/android/internal/app/AlertController;->mWindow:Landroid/view/Window;
+
+    const/16 v2, 0x8
+
+    invoke-virtual {v0, v1, v2}, Lcom/oppo/util/OppoDialogUtil;->setDialogButtonFlag(Landroid/view/Window;I)V
+
     return-void
 .end method

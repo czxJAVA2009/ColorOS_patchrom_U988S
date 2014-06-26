@@ -130,6 +130,14 @@
 
 .field mSurfaceLayer:I
 
+.field mSurfacePositionChanged:Z
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK : Add for MTK position changed"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field mSurfaceResized:Z
 
 .field mSurfaceShown:Z
@@ -2764,6 +2772,11 @@
 
 .method createSurfaceLocked()Landroid/view/Surface;
     .locals 13
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK : Modify for MTK position changed"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v10, 0x0
@@ -3016,6 +3029,10 @@
     iget v2, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfaceY:F
 
     invoke-virtual {v0, v1, v2}, Landroid/view/Surface;->setPosition(FF)V
+
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfacePositionChanged:Z
 
     .line 727
     iget v0, p0, Lcom/android/server/wm/WindowStateAnimator;->mAnimLayer:I
@@ -5011,6 +5028,11 @@
 .method setSurfaceBoundariesLocked(Z)V
     .locals 14
     .parameter "recoveringMemory"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard,2013.02.04: Modify for statusbar translucent; Jianhui.Yu@Plf.SDK : Modify for MTK position changed"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v10, 0x1
@@ -5026,7 +5048,7 @@
 
     and-int/lit16 v9, v9, 0x4000
 
-    if-eqz v9, :cond_7
+    if-eqz v9, :cond_8
 
     .line 1122
     iget v8, v7, Lcom/android/server/wm/WindowState;->mRequestedWidth:I
@@ -5066,7 +5088,7 @@
 
     cmpl-float v9, v9, v11
 
-    if-eqz v9, :cond_8
+    if-eqz v9, :cond_9
 
     :cond_2
     move v5, v10
@@ -5110,47 +5132,44 @@
 
     cmpl-float v9, v9, v6
 
-    if-eqz v9, :cond_5
+    if-eqz v9, :cond_6
 
-    .line 1147
     :cond_4
     :try_start_0
     iput v4, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfaceX:F
 
-    .line 1148
     iput v6, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfaceY:F
 
-    .line 1149
     iget-object v9, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurface:Landroid/view/Surface;
 
     invoke-virtual {v9, v4, v6}, Landroid/view/Surface;->setPosition(FF)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 1160
     :cond_5
     :goto_2
-    if-eqz v5, :cond_6
+    iput-boolean v10, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfacePositionChanged:Z
 
-    .line 1164
+    :cond_6
+    invoke-direct {p0, v7}, Lcom/android/server/wm/WindowStateAnimator;->dispatchPositionChanged(Lcom/android/server/wm/WindowState;)V
+
+    if-eqz v5, :cond_7
+
     const/4 v9, 0x1
 
     :try_start_1
     iput-boolean v9, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfaceResized:Z
 
-    .line 1165
     iget-object v9, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurface:Landroid/view/Surface;
 
     invoke-virtual {v9, v8, v3}, Landroid/view/Surface;->setSize(II)V
 
-    .line 1166
     iget-object v9, v7, Lcom/android/server/wm/WindowState;->mDisplayContent:Lcom/android/server/wm/DisplayContent;
 
     invoke-virtual {v9}, Lcom/android/server/wm/DisplayContent;->getDisplayId()I
 
     move-result v0
 
-    .line 1167
     .local v0, displayId:I
     iget-object v9, p0, Lcom/android/server/wm/WindowStateAnimator;->mAnimator:Lcom/android/server/wm/WindowAnimator;
 
@@ -5165,7 +5184,7 @@
 
     and-int/lit8 v9, v9, 0x2
 
-    if-eqz v9, :cond_6
+    if-eqz v9, :cond_7
 
     .line 1170
     iget-object v9, p0, Lcom/android/server/wm/WindowStateAnimator;->mWin:Lcom/android/server/wm/WindowState;
@@ -5182,7 +5201,7 @@
 
     iget-boolean v9, v7, Lcom/android/server/wm/WindowState;->mExiting:Z
 
-    if-eqz v9, :cond_9
+    if-eqz v9, :cond_a
 
     const/4 v9, 0x0
 
@@ -5195,23 +5214,20 @@
     :try_end_1
     .catch Ljava/lang/RuntimeException; {:try_start_1 .. :try_end_1} :catch_1
 
-    .line 1186
     .end local v0           #displayId:I
     .end local v1           #displayInfo:Landroid/view/DisplayInfo;
-    :cond_6
+    :cond_7
     :goto_4
-    invoke-virtual {p0, p1}, Lcom/android/server/wm/WindowStateAnimator;->updateSurfaceWindowCrop(Z)V
+    invoke-virtual {p0, p1, v7}, Lcom/android/server/wm/WindowStateAnimator;->updateOppoSurfaceWindowCrop(ZLcom/android/server/wm/WindowState;)V
 
-    .line 1187
     return-void
 
-    .line 1125
     .end local v3           #height:I
     .end local v4           #left:F
     .end local v5           #surfaceResized:Z
     .end local v6           #top:F
     .end local v8           #width:I
-    :cond_7
+    :cond_8
     iget-object v9, v7, Lcom/android/server/wm/WindowState;->mCompatFrame:Landroid/graphics/Rect;
 
     invoke-virtual {v9}, Landroid/graphics/Rect;->width()I
@@ -5227,22 +5243,19 @@
     move-result v3
 
     .restart local v3       #height:I
-    goto :goto_0
+    goto/16 :goto_0
 
-    .line 1135
-    :cond_8
+    :cond_9
     const/4 v5, 0x0
 
     goto :goto_1
 
-    .line 1150
     .restart local v4       #left:F
     .restart local v5       #surfaceResized:Z
     .restart local v6       #top:F
     :catch_0
     move-exception v2
 
-    .line 1151
     .local v2, e:Ljava/lang/RuntimeException;
     const-string v9, "WindowStateAnimator"
 
@@ -5308,7 +5321,7 @@
     .end local v2           #e:Ljava/lang/RuntimeException;
     .restart local v0       #displayId:I
     .restart local v1       #displayInfo:Landroid/view/DisplayInfo;
-    :cond_9
+    :cond_a
     :try_start_2
     iget-object v9, v7, Lcom/android/server/wm/WindowState;->mAttrs:Landroid/view/WindowManager$LayoutParams;
 
@@ -5374,10 +5387,8 @@
 
     invoke-static {v9, v11, v2}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    .line 1180
-    if-nez p1, :cond_6
+    if-nez p1, :cond_7
 
-    .line 1181
     iget-object v9, p0, Lcom/android/server/wm/WindowStateAnimator;->mService:Lcom/android/server/wm/WindowManagerService;
 
     const-string v11, "size"
@@ -5437,6 +5448,11 @@
     .locals 4
     .parameter "left"
     .parameter "top"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard,2013.02.04:Modify for statusbar translucent"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1325
@@ -5483,11 +5499,6 @@
     add-int/2addr v3, p2
 
     invoke-virtual {v1, v2, v3}, Landroid/view/Surface;->setPosition(II)V
-
-    .line 1341
-    const/4 v1, 0x0
-
-    invoke-virtual {p0, v1}, Lcom/android/server/wm/WindowStateAnimator;->updateSurfaceWindowCrop(Z)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
@@ -6485,4 +6496,253 @@
     invoke-virtual {v3, p0, v4, v5}, Lcom/android/server/wm/WindowManagerService;->reclaimSomeSurfaceMemoryLocked(Lcom/android/server/wm/WindowStateAnimator;Ljava/lang/String;Z)Z
 
     goto/16 :goto_1
+.end method
+
+.method private dispatchPositionChanged(Lcom/android/server/wm/WindowState;)V
+    .locals 4
+    .parameter "w"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK : Add for MTK position changed"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    const/4 v2, 0x0
+
+    invoke-virtual {p0}, Lcom/android/server/wm/WindowStateAnimator;->isAnimating()Z
+
+    move-result v1
+
+    if-nez v1, :cond_1
+
+    iget-boolean v1, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfacePositionChanged:Z
+
+    if-eqz v1, :cond_1
+
+    iget-object v1, p0, Lcom/android/server/wm/WindowStateAnimator;->mService:Lcom/android/server/wm/WindowManagerService;
+
+    iget-object v1, v1, Lcom/android/server/wm/WindowManagerService;->mAnimator:Lcom/android/server/wm/WindowAnimator;
+
+    invoke-virtual {v1, v2}, Lcom/android/server/wm/WindowAnimator;->getScreenRotationAnimationLocked(I)Lcom/android/server/wm/ScreenRotationAnimation;
+
+    move-result-object v1
+
+    if-nez v1, :cond_1
+
+    :try_start_0
+    invoke-virtual {p1}, Lcom/android/server/wm/WindowState;->isAlive()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    iget-object v1, p1, Lcom/android/server/wm/WindowState;->mClient:Landroid/view/IWindow;
+
+    iget-object v2, p1, Lcom/android/server/wm/WindowState;->mShownFrame:Landroid/graphics/RectF;
+
+    iget v2, v2, Landroid/graphics/RectF;->left:F
+
+    float-to-int v2, v2
+
+    iget-object v3, p1, Lcom/android/server/wm/WindowState;->mShownFrame:Landroid/graphics/RectF;
+
+    iget v3, v3, Landroid/graphics/RectF;->top:F
+
+    float-to-int v3, v3
+
+    invoke-interface {v1, v2, v3}, Landroid/view/IWindow;->dispatchPositionChanged(II)V
+
+    :cond_0
+    const/4 v1, 0x0
+
+    iput-boolean v1, p0, Lcom/android/server/wm/WindowStateAnimator;->mSurfacePositionChanged:Z
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    :cond_1
+    :goto_0
+    return-void
+
+    :catch_0
+    move-exception v0
+
+    .local v0, e:Landroid/os/RemoteException;
+    const-string v1, "WindowStateAnimator"
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "Error dispatching position change: pos=("
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    iget-object v3, p1, Lcom/android/server/wm/WindowState;->mShownFrame:Landroid/graphics/RectF;
+
+    iget v3, v3, Landroid/graphics/RectF;->left:F
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    const-string v3, ","
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    iget-object v3, p1, Lcom/android/server/wm/WindowState;->mShownFrame:Landroid/graphics/RectF;
+
+    iget v3, v3, Landroid/graphics/RectF;->top:F
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    const-string v3, ")"
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2, v0}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+    goto :goto_0
+.end method
+
+.method updateOppoSurfaceWindowCrop(ZLcom/android/server/wm/WindowState;)V
+    .locals 9
+    .parameter "recoveringMemory"
+    .parameter "w"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "licx@OnLineRD.framework.statusbar_extend : Modify for make statusbar translucent, Wanglan add for smali"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    const/4 v5, 0x1
+
+    const/4 v6, 0x0
+
+    iget v7, p0, Lcom/android/server/wm/WindowStateAnimator;->mAttrFlags:I
+
+    and-int/lit16 v7, v7, 0x400
+
+    if-nez v7, :cond_4
+
+    move v4, v5
+
+    .local v4, windowNotFullScreen:Z
+    :goto_0
+    invoke-virtual {p2}, Lcom/android/server/wm/WindowState;->getSystemUiVisibility()I
+
+    move-result v7
+
+    and-int/lit8 v7, v7, 0x4
+
+    if-nez v7, :cond_5
+
+    move v2, v5
+
+    .local v2, systemUiNotFullScreen:Z
+    :goto_1
+    iget v7, p0, Lcom/android/server/wm/WindowStateAnimator;->mAttrFlags:I
+
+    and-int/lit16 v7, v7, 0x800
+
+    if-eqz v7, :cond_6
+
+    move v3, v5
+
+    .local v3, windowForceNotFullScreen:Z
+    :goto_2
+    if-eqz v4, :cond_0
+
+    if-nez v2, :cond_1
+
+    :cond_0
+    if-eqz v3, :cond_7
+
+    :cond_1
+    move v0, v5
+
+    .local v0, hasStatusBar:Z
+    :goto_3
+    iget v7, p0, Lcom/android/server/wm/WindowStateAnimator;->mAttrFlags:I
+
+    const/high16 v8, 0x10
+
+    and-int/2addr v7, v8
+
+    if-eqz v7, :cond_8
+
+    move v1, v5
+
+    .local v1, showWallpaper:Z
+    :goto_4
+    if-nez v1, :cond_3
+
+    iget v5, p0, Lcom/android/server/wm/WindowStateAnimator;->mAttrType:I
+
+    const/16 v6, 0x7dd
+
+    if-eq v5, v6, :cond_3
+
+    if-eqz v0, :cond_2
+
+    iget v5, p0, Lcom/android/server/wm/WindowStateAnimator;->mAttrFlags:I
+
+    const/high16 v6, 0x1
+
+    and-int/2addr v5, v6
+
+    if-eqz v5, :cond_3
+
+    :cond_2
+    invoke-virtual {p0, p1}, Lcom/android/server/wm/WindowStateAnimator;->updateSurfaceWindowCrop(Z)V
+
+    :cond_3
+    return-void
+
+    .end local v0           #hasStatusBar:Z
+    .end local v1           #showWallpaper:Z
+    .end local v2           #systemUiNotFullScreen:Z
+    .end local v3           #windowForceNotFullScreen:Z
+    .end local v4           #windowNotFullScreen:Z
+    :cond_4
+    move v4, v6
+
+    goto :goto_0
+
+    .restart local v4       #windowNotFullScreen:Z
+    :cond_5
+    move v2, v6
+
+    goto :goto_1
+
+    .restart local v2       #systemUiNotFullScreen:Z
+    :cond_6
+    move v3, v6
+
+    goto :goto_2
+
+    .restart local v3       #windowForceNotFullScreen:Z
+    :cond_7
+    move v0, v6
+
+    goto :goto_3
+
+    .restart local v0       #hasStatusBar:Z
+    :cond_8
+    move v1, v6
+
+    goto :goto_4
 .end method

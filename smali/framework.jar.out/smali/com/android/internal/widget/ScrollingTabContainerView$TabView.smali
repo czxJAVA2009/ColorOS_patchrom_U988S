@@ -7,12 +7,18 @@
 
 
 # annotations
+.annotation build Landroid/annotation/OppoHook;
+    level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+    note = "Jianhui.Yu@Plf.SDK,2013.10.05: [-private] Modify for oppoStyle Tab"
+    property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+.end annotation
+
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/android/internal/widget/ScrollingTabContainerView;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x2
+    accessFlags = 0x0
     name = "TabView"
 .end annotation
 
@@ -24,7 +30,13 @@
 
 .field private mTab:Landroid/app/ActionBar$Tab;
 
-.field private mTextView:Landroid/widget/TextView;
+.field mTextView:Landroid/widget/TextView;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05:[-private] Modify for title marquee"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field final synthetic this$0:Lcom/android/internal/widget/ScrollingTabContainerView;
 

@@ -186,8 +186,13 @@
     return-void
 .end method
 
-.method private constructor <init>()V
+.method protected constructor <init>()V
     .locals 0
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "private: modify access from private to protected"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 81
@@ -3361,4 +3366,18 @@
     .line 1459
     .local v0, ex:Ljava/lang/NullPointerException;
     goto :goto_0
+.end method
+
+.method public getDefaultSim()I
+    .locals 1
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "get default sim, only for QCOM platform"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->OPPO:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    const/4 v0, -0x1
+
+    return v0
 .end method

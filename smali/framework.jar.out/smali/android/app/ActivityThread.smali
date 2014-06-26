@@ -1183,6 +1183,11 @@
     .locals 11
     .parameter "r"
     .parameter "activity"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.Framework.SDK : Modify for oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 2207
@@ -1278,6 +1283,8 @@
     .end local v6           #i$:I
     .end local v7           #len$:I
     :cond_0
+    invoke-direct {p0, p1, v2}, Landroid/app/ActivityThread;->setTheme(Landroid/app/ActivityThread$ActivityClientRecord;Landroid/content/Context;)V
+
     return-object v2
 
     .line 2219
@@ -10832,6 +10839,11 @@
     .locals 12
     .parameter "config"
     .parameter "compat"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Yaojun.Luo@Plf.SDK,2013.10.07: Modify for rom theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 3838
@@ -10902,35 +10914,29 @@
 
     if-nez v10, :cond_3
 
-    .line 3853
     :cond_2
     iput-object p2, p0, Landroid/app/ActivityThread;->mResCompatibilityInfo:Landroid/content/res/CompatibilityInfo;
 
-    .line 3854
     or-int/lit16 v0, v0, 0xd00
 
-    .line 3860
     :cond_3
+    invoke-static {v0}, Landroid/app/OppoThemeHelper;->handleExtraConfigurationChanges(I)V
+
     iget-object v10, p1, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
 
     if-eqz v10, :cond_4
 
-    .line 3861
     iget-object v10, p1, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
 
     invoke-static {v10}, Ljava/util/Locale;->setDefault(Ljava/util/Locale;)V
 
-    .line 3864
     :cond_4
     invoke-static {p1, v1, p2}, Landroid/content/res/Resources;->updateSystemConfiguration(Landroid/content/res/Configuration;Landroid/util/DisplayMetrics;Landroid/content/res/CompatibilityInfo;)V
 
-    .line 3866
     invoke-static {}, Landroid/app/ApplicationPackageManager;->configurationChanged()V
 
-    .line 3869
     const/4 v9, 0x0
 
-    .line 3871
     .local v9, tmpConfig:Landroid/content/res/Configuration;
     iget-object v10, p0, Landroid/app/ActivityThread;->mActiveResources:Ljava/util/HashMap;
 
@@ -12664,6 +12670,11 @@
     .parameter "displayId"
     .parameter "overrideConfiguration"
     .parameter "compInfo"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Yaojun.Luo@Plf.SDK,2013.10.07: Modify for rom theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v3, 0x0
@@ -12815,18 +12826,14 @@
     .line 1721
     :cond_5
     :goto_3
-    new-instance v6, Landroid/content/res/Resources;
+    invoke-static {v0, v2, v1, p4}, Landroid/content/res/OppoClassFactory;->newResources(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
 
-    .end local v6           #r:Landroid/content/res/Resources;
-    invoke-direct {v6, v0, v2, v1, p4}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)V
+    move-result-object v6
 
-    .line 1728
-    .restart local v6       #r:Landroid/content/res/Resources;
     iget-object v9, p0, Landroid/app/ActivityThread;->mPackages:Ljava/util/HashMap;
 
     monitor-enter v9
 
-    .line 1729
     :try_start_1
     iget-object v8, p0, Landroid/app/ActivityThread;->mActiveResources:Ljava/util/HashMap;
 
@@ -16049,4 +16056,165 @@
 
     .line 1969
     return-void
+.end method
+
+.method private setTheme(Landroid/app/ActivityThread$ActivityClientRecord;Landroid/content/Context;)V
+    .locals 2
+    .parameter "r"
+    .parameter "baseContext"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK : Add for oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iget-object v1, p1, Landroid/app/ActivityThread$ActivityClientRecord;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    invoke-virtual {v1}, Landroid/content/pm/ActivityInfo;->getThemeResource()I
+
+    move-result v0
+
+    .local v0, theme:I
+    if-eqz v0, :cond_0
+
+    invoke-virtual {p2, v0}, Landroid/content/Context;->setTheme(I)V
+
+    :cond_0
+    return-void
+.end method
+
+.method getTopLevelResources(Landroid/app/LoadedApk;Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
+    .locals 3
+    .parameter "mPackageInfo"
+    .parameter "resDir"
+    .parameter "displayId"
+    .parameter "overrideConfiguration"
+    .parameter "compInfo"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Yaojun.Luo@Plf.Framework.SDK: Modify for rom theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    invoke-virtual {p0, p2, p3, p4, p5}, Landroid/app/ActivityThread;->getTopLevelResources(Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    .local v0, r:Landroid/content/res/Resources;
+    if-eqz v0, :cond_0
+
+    instance-of v1, v0, Landroid/content/res/OppoResources;
+
+    if-eqz v1, :cond_0
+
+    if-eqz p1, :cond_0
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/OppoResources;
+
+    iget-object v2, p1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
+
+    invoke-virtual {v1, v2}, Landroid/content/res/OppoResources;->setThemeChangeEnable(Ljava/lang/String;)V
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/OppoResources;
+
+    iget-object v2, p1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
+
+    invoke-virtual {v1, v2}, Landroid/content/res/OppoResources;->init(Ljava/lang/String;)V
+
+    :cond_0
+    return-object v0
+.end method
+
+.method getTopLevelResources(Landroid/content/pm/ApplicationInfo;Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
+    .locals 3
+    .parameter "app"
+    .parameter "resDir"
+    .parameter "displayId"
+    .parameter "overrideConfiguration"
+    .parameter "compInfo"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Yaojun.Luo@Plf.Framework.SDK: Modify for rom theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    invoke-virtual {p0, p2, p3, p4, p5}, Landroid/app/ActivityThread;->getTopLevelResources(Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    .local v0, r:Landroid/content/res/Resources;
+    if-eqz v0, :cond_0
+
+    instance-of v1, v0, Landroid/content/res/OppoResources;
+
+    if-eqz v1, :cond_0
+
+    if-eqz p1, :cond_0
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/OppoResources;
+
+    iget-object v2, p1, Landroid/content/pm/ApplicationInfo;->packageName:Ljava/lang/String;
+
+    invoke-virtual {v1, v2}, Landroid/content/res/OppoResources;->setThemeChangeEnable(Ljava/lang/String;)V
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/OppoResources;
+
+    iget-object v2, p1, Landroid/content/pm/ApplicationInfo;->packageName:Ljava/lang/String;
+
+    invoke-virtual {v1, v2}, Landroid/content/res/OppoResources;->init(Ljava/lang/String;)V
+
+    :cond_0
+    return-object v0
+.end method
+
+.method getTopLevelResources(Ljava/lang/String;Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
+    .locals 2
+    .parameter "packageName"
+    .parameter "resDir"
+    .parameter "displayId"
+    .parameter "overrideConfiguration"
+    .parameter "compInfo"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Yaojun.Luo@Plf.SDK,2013.10.07: Modify for rom theme"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    invoke-virtual {p0, p2, p3, p4, p5}, Landroid/app/ActivityThread;->getTopLevelResources(Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    .local v0, r:Landroid/content/res/Resources;
+    if-eqz v0, :cond_0
+
+    instance-of v1, v0, Landroid/content/res/OppoResources;
+
+    if-eqz v1, :cond_0
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/OppoResources;
+
+    invoke-virtual {v1, p1}, Landroid/content/res/OppoResources;->setThemeChangeEnable(Ljava/lang/String;)V
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/OppoResources;
+
+    invoke-virtual {v1, p1}, Landroid/content/res/OppoResources;->init(Ljava/lang/String;)V
+
+    :cond_0
+    return-object v0
 .end method

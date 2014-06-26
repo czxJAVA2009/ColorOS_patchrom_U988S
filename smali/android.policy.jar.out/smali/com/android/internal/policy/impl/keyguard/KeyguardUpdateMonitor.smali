@@ -2115,3 +2115,18 @@
     .line 801
     return-void
 .end method
+
+.method public getSimState(I)Lcom/android/internal/telephony/IccCardConstants$State;
+    .locals 1
+    .parameter "simId"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangkai@Plf.Keyguard, 2012.06.04:modify for apklock"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardUpdateMonitor;->mSimState:Lcom/android/internal/telephony/IccCardConstants$State;
+
+    return-object v0
+.end method

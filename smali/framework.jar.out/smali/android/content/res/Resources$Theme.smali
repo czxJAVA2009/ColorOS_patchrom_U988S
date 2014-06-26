@@ -1,15 +1,21 @@
-.class public final Landroid/content/res/Resources$Theme;
+.class public Landroid/content/res/Resources$Theme;
 .super Ljava/lang/Object;
 .source "Resources.java"
 
 
 # annotations
+.annotation build Landroid/annotation/OppoHook;
+    level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+    note = "final : Xiaokang.Feng@Plf.Framework.SDK : Modify for rom theme"
+    property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+.end annotation
+
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Landroid/content/res/Resources;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x11
+    accessFlags = 0x1
     name = "Theme"
 .end annotation
 

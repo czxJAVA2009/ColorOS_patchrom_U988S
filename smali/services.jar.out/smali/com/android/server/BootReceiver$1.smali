@@ -43,7 +43,10 @@
     .locals 4
 
     .prologue
-    .line 70
+    iget-object v1, p0, Lcom/android/server/BootReceiver$1;->val$context:Landroid/content/Context;
+
+    invoke-static {v1}, Lcom/oppo/ota/OppoOtaUtils;->notifyOTAUpdateResult(Landroid/content/Context;)V
+
     :try_start_0
     iget-object v2, p0, Lcom/android/server/BootReceiver$1;->this$0:Lcom/android/server/BootReceiver;
 

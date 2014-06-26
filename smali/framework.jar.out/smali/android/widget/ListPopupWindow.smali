@@ -2124,9 +2124,14 @@
     return-void
 .end method
 
-.method setListItemExpandMax(I)V
+.method public setListItemExpandMax(I)V
     .locals 0
     .parameter "max"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Liangjing.Fu@Plf.SDK,2013.10.07:[+public+hide]merge oppolistview"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 801

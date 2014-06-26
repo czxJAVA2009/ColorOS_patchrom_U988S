@@ -89,3 +89,10 @@
 
 .method public abstract showLw(Z)Z
 .end method
+
+.method public abstract getAttachedWindow()Landroid/view/WindowManagerPolicy$WindowState;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangkai add for apklock"
+    .end annotation
+.end method

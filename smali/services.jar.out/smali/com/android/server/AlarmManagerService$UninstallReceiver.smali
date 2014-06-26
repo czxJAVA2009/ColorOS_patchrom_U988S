@@ -97,6 +97,11 @@
     .locals 12
     .parameter "context"
     .parameter "intent"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jun.Zhang@Plf.Framework, alarm filter packages for oppo"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1278
@@ -329,31 +334,31 @@
 
     if-eqz v9, :cond_6
 
-    .line 1301
     monitor-exit v10
 
     goto :goto_1
 
-    .line 1303
     :cond_6
     invoke-virtual {p2}, Landroid/content/Intent;->getData()Landroid/net/Uri;
 
     move-result-object v2
 
-    .line 1304
     .local v2, data:Landroid/net/Uri;
     if-eqz v2, :cond_3
 
-    .line 1305
     invoke-virtual {v2}, Landroid/net/Uri;->getSchemeSpecificPart()Ljava/lang/String;
 
     move-result-object v6
 
-    .line 1306
     .restart local v6       #pkg:Ljava/lang/String;
     if-eqz v6, :cond_3
 
-    .line 1307
+    invoke-static {v6}, Lcom/android/server/OppoAlarmManagerHelper;->isFilterRemovePackage(Ljava/lang/String;)Z
+
+    move-result v9
+
+    if-nez v9, :cond_3
+
     const/4 v9, 0x1
 
     new-array v7, v9, [Ljava/lang/String;

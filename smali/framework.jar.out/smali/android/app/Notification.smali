@@ -91,6 +91,14 @@
 
 .field public contentView:Landroid/widget/RemoteViews;
 
+.field public contentViewTouchHandle:I
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2012.06.04:MTK FIELD"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field public defaults:I
 
 .field public deleteIntent:Landroid/app/PendingIntent;
@@ -118,6 +126,22 @@
 .field public number:I
 
 .field public priority:I
+
+.field public simId:J
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2012.06.04:MTK FIELD"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
+.field public simInfoType:I
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2012.06.04:MTK FIELD"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field public sound:Landroid/net/Uri;
 
@@ -891,13 +915,19 @@
     .parameter "contentTitle"
     .parameter "contentText"
     .parameter "contentIntent"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2013.02.04: make notification to oppo\'s"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
     .annotation runtime Ljava/lang/Deprecated;
     .end annotation
 
     .prologue
-    const v6, 0x1020064
+    const v6, 0xc020472
 
-    const v4, 0x1020006
+    const v4, 0xc020434
 
     .line 804
     new-instance v0, Landroid/widget/RemoteViews;
@@ -929,41 +959,34 @@
 
     if-ge v2, v3, :cond_1
 
-    .line 810
-    const-string/jumbo v2, "setBackgroundResource"
+    const-string v2, "setBackgroundResource"
 
     const v3, 0x1080734
 
     invoke-virtual {v0, v4, v2, v3}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
-    .line 812
     const v2, 0x102033e
 
-    const-string/jumbo v3, "setBackgroundResource"
+    const-string v3, "setBackgroundResource"
 
     const v4, 0x10804db
 
     invoke-virtual {v0, v2, v3, v4}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
-    .line 815
     :cond_1
     if-eqz p2, :cond_2
 
-    .line 816
-    const v2, 0x1020016
+    const v2, 0xc02049c
 
     invoke-virtual {v0, v2, p2}, Landroid/widget/RemoteViews;->setTextViewText(ILjava/lang/CharSequence;)V
 
-    .line 818
     :cond_2
     if-eqz p3, :cond_3
 
-    .line 819
-    const v2, 0x1020046
+    const v2, 0xc020435
 
     invoke-virtual {v0, v2, p3}, Landroid/widget/RemoteViews;->setTextViewText(ILjava/lang/CharSequence;)V
 
-    .line 821
     :cond_3
     iget-wide v2, p0, Landroid/app/Notification;->when:J
 

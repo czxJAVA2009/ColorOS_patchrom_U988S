@@ -7,12 +7,18 @@
 
 
 # annotations
+.annotation build Landroid/annotation/OppoHook;
+    level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+    note = "Jianhui.Yu@Plf.SDK,2013.10.05:[-private] Modify for ActionBar of oppo style"
+    property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+.end annotation
+
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/android/internal/policy/impl/PhoneWindow;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0x12
+    accessFlags = 0x10
     name = "DecorView"
 .end annotation
 
@@ -2388,6 +2394,11 @@
 .method public startActionMode(Landroid/view/ActionMode$Callback;)Landroid/view/ActionMode;
     .locals 11
     .parameter "callback"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05: Modify for ActionBar of oppo style"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v10, 0x0
@@ -2515,12 +2526,11 @@
 
     if-eqz v5, :cond_7
 
-    .line 2266
-    new-instance v5, Lcom/android/internal/widget/ActionBarContextView;
+    iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mContext:Landroid/content/Context;
 
-    iget-object v8, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mContext:Landroid/content/Context;
+    invoke-static {v5}, Lcom/android/internal/policy/impl/OppoPhoneWindow;->newActionBarContextView(Landroid/content/Context;)Lcom/android/internal/widget/ActionBarContextView;
 
-    invoke-direct {v5, v8}, Lcom/android/internal/widget/ActionBarContextView;-><init>(Landroid/content/Context;)V
+    move-result-object v5
 
     iput-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionModeView:Lcom/android/internal/widget/ActionBarContextView;
 
@@ -2629,15 +2639,10 @@
 
     if-eqz v5, :cond_2
 
-    .line 2300
     iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionModeView:Lcom/android/internal/widget/ActionBarContextView;
 
     invoke-virtual {v5}, Lcom/android/internal/widget/ActionBarContextView;->killMode()V
 
-    .line 2301
-    new-instance v2, Lcom/android/internal/view/StandaloneActionMode;
-
-    .end local v2           #mode:Landroid/view/ActionMode;
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->getContext()Landroid/content/Context;
 
     move-result-object v8
@@ -2651,10 +2656,10 @@
     move v5, v6
 
     :goto_4
-    invoke-direct {v2, v8, v9, v4, v5}, Lcom/android/internal/view/StandaloneActionMode;-><init>(Landroid/content/Context;Lcom/android/internal/widget/ActionBarContextView;Landroid/view/ActionMode$Callback;Z)V
+    invoke-static {v8, v9, v4, v5}, Lcom/android/internal/policy/impl/OppoPhoneWindow;->newActionMode(Landroid/content/Context;Lcom/android/internal/widget/ActionBarContextView;Landroid/view/ActionMode$Callback;Z)Lcom/android/internal/view/StandaloneActionMode;
 
-    .line 2303
-    .restart local v2       #mode:Landroid/view/ActionMode;
+    move-result-object v2
+
     invoke-virtual {v2}, Landroid/view/ActionMode;->getMenu()Landroid/view/Menu;
 
     move-result-object v5
@@ -2665,33 +2670,26 @@
 
     if-eqz v5, :cond_9
 
-    .line 2304
     invoke-virtual {v2}, Landroid/view/ActionMode;->invalidate()V
 
-    .line 2305
     iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionModeView:Lcom/android/internal/widget/ActionBarContextView;
 
     invoke-virtual {v5, v2}, Lcom/android/internal/widget/ActionBarContextView;->initForMode(Landroid/view/ActionMode;)V
 
-    .line 2306
     iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionModeView:Lcom/android/internal/widget/ActionBarContextView;
 
-    invoke-virtual {v5, v7}, Lcom/android/internal/widget/ActionBarContextView;->setVisibility(I)V
+    invoke-virtual {v5, v7}, Lcom/android/internal/widget/ActionBarContextView;->animateToVisibility(I)V
 
-    .line 2307
     iput-object v2, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionMode:Landroid/view/ActionMode;
 
-    .line 2308
     iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionModePopup:Landroid/widget/PopupWindow;
 
     if-eqz v5, :cond_6
 
-    .line 2309
     iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mShowActionModePopup:Ljava/lang/Runnable;
 
     invoke-virtual {p0, v5}, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->post(Ljava/lang/Runnable;)Z
 
-    .line 2311
     :cond_6
     iget-object v5, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionModeView:Lcom/android/internal/widget/ActionBarContextView;
 
@@ -2711,11 +2709,11 @@
 
     check-cast v3, Landroid/view/ViewStub;
 
-    .line 2293
     .local v3, stub:Landroid/view/ViewStub;
     if-eqz v3, :cond_5
 
-    .line 2294
+    invoke-static {v3}, Lcom/android/internal/policy/impl/OppoPhoneWindow;->setActionModeLayout(Landroid/view/ViewStub;)V
+
     invoke-virtual {v3}, Landroid/view/ViewStub;->inflate()Landroid/view/View;
 
     move-result-object v5
@@ -2726,28 +2724,22 @@
 
     goto :goto_3
 
-    .end local v2           #mode:Landroid/view/ActionMode;
     .end local v3           #stub:Landroid/view/ViewStub;
     :cond_8
     move v5, v7
 
-    .line 2301
     goto :goto_4
 
-    .line 2314
-    .restart local v2       #mode:Landroid/view/ActionMode;
     :cond_9
     iput-object v10, p0, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->mActionMode:Landroid/view/ActionMode;
 
     goto/16 :goto_1
 
-    .line 2321
     :catch_0
     move-exception v5
 
     goto/16 :goto_2
 
-    .line 2257
     :catch_1
     move-exception v5
 

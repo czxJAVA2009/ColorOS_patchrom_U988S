@@ -310,7 +310,7 @@
 
     move v6, v4
 
-    invoke-direct/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
+    invoke-virtual/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
 
     .line 3031
     return-object v1
@@ -359,7 +359,7 @@
 
     move-object v0, p0
 
-    invoke-direct/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
+    invoke-virtual/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
 
     .line 3040
     return-object v1
@@ -2785,7 +2785,7 @@
 
     move v2, p2
 
-    invoke-direct/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v6
 
@@ -2869,7 +2869,7 @@
 
     move v5, v3
 
-    invoke-direct/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v7
 
@@ -2970,7 +2970,7 @@
 
     move v3, p1
 
-    invoke-direct/range {v1 .. v6}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v1 .. v6}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v10
 
@@ -3160,24 +3160,20 @@
 
     move v2, p2
 
-    invoke-direct/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v10
 
-    .line 1322
     .local v10, temp:Landroid/view/View;
     iput p1, p0, Landroid/widget/AdapterView;->mFirstPosition:I
 
-    .line 1327
     iget v9, p0, Landroid/widget/ListView;->mDividerHeight:I
 
-    .line 1328
     .local v9, dividerHeight:I
     iget-boolean v0, p0, Landroid/widget/AbsListView;->mStackFromBottom:Z
 
-    if-nez v0, :cond_2
+    if-nez v0, :cond_4
 
-    .line 1329
     add-int/lit8 v0, p1, -0x1
 
     invoke-virtual {v10}, Landroid/view/View;->getTop()I
@@ -3207,45 +3203,42 @@
 
     move-result-object v7
 
-    .line 1333
     .local v7, below:Landroid/view/View;
     invoke-virtual {p0}, Landroid/widget/ListView;->getChildCount()I
 
     move-result v8
 
-    .line 1334
     .local v8, childCount:I
-    if-lez v8, :cond_0
+    if-lez v8, :cond_2
 
-    .line 1335
     invoke-direct {p0, v8}, Landroid/widget/ListView;->correctTooHigh(I)V
 
-    .line 1348
-    :cond_0
-    :goto_1
-    if-eqz v5, :cond_3
-
-    .line 1353
-    .end local v10           #temp:Landroid/view/View;
+    :cond_2
     :goto_2
-    return-object v10
+    if-nez v5, :cond_0
 
-    .line 1319
+    if-eqz v6, :cond_5
+
+    move-object v10, v6
+
+    goto :goto_0
+
     .end local v5           #tempIsSelected:Z
     .end local v6           #above:Landroid/view/View;
     .end local v7           #below:Landroid/view/View;
     .end local v8           #childCount:I
     .end local v9           #dividerHeight:I
-    :cond_1
+    .end local v10           #temp:Landroid/view/View;
+    :cond_3
     const/4 v5, 0x0
 
-    goto :goto_0
+    goto :goto_1
 
     .line 1338
     .restart local v5       #tempIsSelected:Z
     .restart local v9       #dividerHeight:I
     .restart local v10       #temp:Landroid/view/View;
-    :cond_2
+    :cond_4
     add-int/lit8 v0, p1, 0x1
 
     invoke-virtual {v10}, Landroid/view/View;->getBottom()I
@@ -3275,35 +3268,22 @@
 
     move-result-object v6
 
-    .line 1342
     .restart local v6       #above:Landroid/view/View;
     invoke-virtual {p0}, Landroid/widget/ListView;->getChildCount()I
 
     move-result v8
 
-    .line 1343
     .restart local v8       #childCount:I
-    if-lez v8, :cond_0
+    if-lez v8, :cond_2
 
-    .line 1344
     invoke-direct {p0, v8}, Landroid/widget/ListView;->correctTooLow(I)V
 
-    goto :goto_1
-
-    .line 1350
-    :cond_3
-    if-eqz v6, :cond_4
-
-    move-object v10, v6
-
-    .line 1351
     goto :goto_2
 
-    :cond_4
+    :cond_5
     move-object v10, v7
 
-    .line 1353
-    goto :goto_2
+    goto :goto_0
 .end method
 
 .method private fillUp(II)Landroid/view/View;
@@ -3363,7 +3343,7 @@
 
     move v2, p2
 
-    invoke-direct/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v0 .. v5}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v6
 
@@ -4192,13 +4172,18 @@
     goto :goto_1
 .end method
 
-.method private makeAndAddView(IIZIZ)Landroid/view/View;
+.method makeAndAddView(IIZIZ)Landroid/view/View;
     .locals 9
     .parameter "position"
     .parameter "y"
     .parameter "flow"
     .parameter "childrenLeft"
     .parameter "selected"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.07 :[-private]Modify for list remove animation"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1818
@@ -4232,7 +4217,7 @@
 
     move v6, p5
 
-    invoke-direct/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
+    invoke-virtual/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
 
     move-object v8, v1
 
@@ -4271,7 +4256,7 @@
 
     move v6, p5
 
-    invoke-direct/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
+    invoke-virtual/range {v0 .. v7}, Landroid/widget/ListView;->setupChild(Landroid/view/View;IIZIZZ)V
 
     move-object v8, v1
 
@@ -4583,7 +4568,7 @@
 
     move-object/from16 v2, p0
 
-    invoke-direct/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object p1
 
@@ -4614,7 +4599,7 @@
 
     move v3, v15
 
-    invoke-direct/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v14
 
@@ -4794,7 +4779,7 @@
 
     move v3, v15
 
-    invoke-direct/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v14
 
@@ -4878,7 +4863,7 @@
 
     move v3, v15
 
-    invoke-direct/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v14
 
@@ -4908,7 +4893,7 @@
 
     move v3, v15
 
-    invoke-direct/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
+    invoke-virtual/range {v2 .. v7}, Landroid/widget/ListView;->makeAndAddView(IIZIZ)Landroid/view/View;
 
     move-result-object v14
 
@@ -5399,7 +5384,7 @@
     return-void
 .end method
 
-.method private setupChild(Landroid/view/View;IIZIZZ)V
+.method setupChild(Landroid/view/View;IIZIZZ)V
     .locals 22
     .parameter "child"
     .parameter "position"
@@ -5408,9 +5393,23 @@
     .parameter "childrenLeft"
     .parameter "selected"
     .parameter "recycled"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.07:[-private]Modify for list remove animation"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    .line 1855
+    move-object/from16 v0, p0
+
+    move/from16 v1, p2
+
+    move/from16 v2, p5
+
+    invoke-virtual {v0, v1, v2}, Landroid/widget/ListView;->calChildrenLeftPosition(II)I
+
+    move-result p5
+
     if-eqz p6, :cond_9
 
     invoke-virtual/range {p0 .. p0}, Landroid/widget/ListView;->shouldShowSelector()Z
@@ -12432,4 +12431,18 @@
 
     .line 900
     return-void
+.end method
+
+.method protected calChildrenLeftPosition(II)I
+    .locals 0
+    .parameter "position"
+    .parameter "childrenLeft"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK, 2014-02-14 : Add for do animation when viewpager slide"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    return p2
 .end method

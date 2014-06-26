@@ -154,6 +154,11 @@
 .method protected onBindView(Landroid/view/View;)V
     .locals 4
     .parameter "view"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK : Modify for fix bug"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 102
@@ -168,56 +173,62 @@
 
     .line 105
     .local v0, checkableView:Landroid/view/View;
-    if-eqz v0, :cond_0
+    if-eqz v0, :cond_1
 
     instance-of v2, v0, Landroid/widget/Checkable;
 
-    if-eqz v2, :cond_0
+    if-eqz v2, :cond_1
 
-    move-object v2, v0
-
-    .line 106
-    check-cast v2, Landroid/widget/Checkable;
-
-    iget-boolean v3, p0, Landroid/preference/TwoStatePreference;->mChecked:Z
-
-    invoke-interface {v2, v3}, Landroid/widget/Checkable;->setChecked(Z)V
-
-    .line 108
-    invoke-virtual {p0, v0}, Landroid/preference/SwitchPreference;->sendAccessibilityEvent(Landroid/view/View;)V
-
-    .line 110
     instance-of v2, v0, Landroid/widget/Switch;
 
     if-eqz v2, :cond_0
 
     move-object v1, v0
 
-    .line 111
     check-cast v1, Landroid/widget/Switch;
 
-    .line 112
     .local v1, switchView:Landroid/widget/Switch;
+    const/4 v2, 0x0
+
+    invoke-virtual {v1, v2}, Landroid/widget/Switch;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+
+    .end local v1           #switchView:Landroid/widget/Switch;
+    :cond_0
+    move-object v2, v0
+
+    check-cast v2, Landroid/widget/Checkable;
+
+    iget-boolean v3, p0, Landroid/preference/TwoStatePreference;->mChecked:Z
+
+    invoke-interface {v2, v3}, Landroid/widget/Checkable;->setChecked(Z)V
+
+    invoke-virtual {p0, v0}, Landroid/preference/SwitchPreference;->sendAccessibilityEvent(Landroid/view/View;)V
+
+    instance-of v2, v0, Landroid/widget/Switch;
+
+    if-eqz v2, :cond_1
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/widget/Switch;
+
+    .restart local v1       #switchView:Landroid/widget/Switch;
     iget-object v2, p0, Landroid/preference/SwitchPreference;->mSwitchOn:Ljava/lang/CharSequence;
 
     invoke-virtual {v1, v2}, Landroid/widget/Switch;->setTextOn(Ljava/lang/CharSequence;)V
 
-    .line 113
     iget-object v2, p0, Landroid/preference/SwitchPreference;->mSwitchOff:Ljava/lang/CharSequence;
 
     invoke-virtual {v1, v2}, Landroid/widget/Switch;->setTextOff(Ljava/lang/CharSequence;)V
 
-    .line 114
     iget-object v2, p0, Landroid/preference/SwitchPreference;->mListener:Landroid/preference/SwitchPreference$Listener;
 
     invoke-virtual {v1, v2}, Landroid/widget/Switch;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
 
-    .line 118
     .end local v1           #switchView:Landroid/widget/Switch;
-    :cond_0
+    :cond_1
     invoke-virtual {p0, p1}, Landroid/preference/SwitchPreference;->syncSummaryView(Landroid/view/View;)V
 
-    .line 119
     return-void
 .end method
 

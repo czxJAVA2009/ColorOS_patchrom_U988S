@@ -237,6 +237,11 @@
     .locals 18
     .parameter "resId"
     .parameter "fitIn1U"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2013.02.04: make notification to oppo\'s"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1420
@@ -254,19 +259,15 @@
 
     invoke-direct {v1, v2, v0}, Landroid/widget/RemoteViews;-><init>(Ljava/lang/String;I)V
 
-    .line 1421
     .local v1, contentView:Landroid/widget/RemoteViews;
     const/4 v10, 0x0
 
-    .line 1422
     .local v10, showLine3:Z
     const/4 v9, 0x0
 
-    .line 1423
     .local v9, showLine2:Z
-    const v11, 0x1020006
+    const v11, 0xc020434
 
-    .line 1424
     .local v11, smallIconImageViewId:I
     move-object/from16 v0, p0
 
@@ -274,8 +275,7 @@
 
     if-eqz v2, :cond_0
 
-    .line 1425
-    const v2, 0x1020006
+    const v2, 0xc020434
 
     move-object/from16 v0, p0
 
@@ -283,10 +283,8 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/widget/RemoteViews;->setImageViewBitmap(ILandroid/graphics/Bitmap;)V
 
-    .line 1426
-    const v11, 0x102023f
+    const v11, 0xc020475
 
-    .line 1428
     :cond_0
     move-object/from16 v0, p0
 
@@ -296,25 +294,22 @@
 
     if-ge v2, v3, :cond_1
 
-    .line 1429
-    const v2, 0x1020006
+    const v2, 0xc020434
 
-    const-string/jumbo v3, "setBackgroundResource"
+    const-string v3, "setBackgroundResource"
 
     const v4, 0x1080734
 
     invoke-virtual {v1, v2, v3, v4}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
-    .line 1431
     const v2, 0x102033e
 
-    const-string/jumbo v3, "setBackgroundResource"
+    const-string v3, "setBackgroundResource"
 
     const v4, 0x10804db
 
     invoke-virtual {v1, v2, v3, v4}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
-    .line 1434
     :cond_1
     move-object/from16 v0, p0
 
@@ -342,8 +337,7 @@
 
     if-eqz v2, :cond_2
 
-    .line 1441
-    const v2, 0x1020016
+    const v2, 0xc02049c
 
     move-object/from16 v0, p0
 
@@ -359,8 +353,7 @@
 
     if-eqz v2, :cond_3
 
-    .line 1444
-    const v2, 0x1020046
+    const v2, 0xc020435
 
     move-object/from16 v0, p0
 
@@ -406,8 +399,7 @@
 
     if-eqz v2, :cond_b
 
-    .line 1469
-    const v2, 0x1020046
+    const v2, 0xc020435
 
     move-object/from16 v0, p0
 
@@ -415,15 +407,13 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/widget/RemoteViews;->setTextViewText(ILjava/lang/CharSequence;)V
 
-    .line 1470
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/app/Notification$Builder;->mContentText:Ljava/lang/CharSequence;
 
     if-eqz v2, :cond_a
 
-    .line 1471
-    const v2, 0x1020015
+    const v2, 0xc020476
 
     move-object/from16 v0, p0
 
@@ -431,24 +421,19 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/widget/RemoteViews;->setTextViewText(ILjava/lang/CharSequence;)V
 
-    .line 1472
-    const v2, 0x1020015
+    const v2, 0xc020476
 
     const/4 v3, 0x0
 
     invoke-virtual {v1, v2, v3}, Landroid/widget/RemoteViews;->setViewVisibility(II)V
 
-    .line 1473
     const/4 v9, 0x1
 
-    .line 1488
     :goto_2
     if-eqz v9, :cond_5
 
-    .line 1489
     if-eqz p2, :cond_4
 
-    .line 1491
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/app/Notification$Builder;->mContext:Landroid/content/Context;
@@ -469,7 +454,7 @@
 
     .line 1494
     .local v12, subTextSize:F
-    const v2, 0x1020046
+    const v2, 0xc020435
 
     const/4 v3, 0x0
 
@@ -689,7 +674,7 @@
 
     .line 1475
     :cond_a
-    const v2, 0x1020015
+    const v2, 0xc020476
 
     const/16 v3, 0x8
 
@@ -699,7 +684,7 @@
 
     .line 1478
     :cond_b
-    const v2, 0x1020015
+    const v2, 0xc020476
 
     const/16 v3, 0x8
 
@@ -760,16 +745,15 @@
 
     .line 1507
     :cond_e
-    const v2, 0x1020064
+    const v2, 0xc020472
 
     const/4 v3, 0x0
 
     invoke-virtual {v1, v2, v3}, Landroid/widget/RemoteViews;->setViewVisibility(II)V
 
-    .line 1508
-    const v2, 0x1020064
+    const v2, 0xc020472
 
-    const-string/jumbo v3, "setTime"
+    const-string v3, "setTime"
 
     move-object/from16 v0, p0
 
@@ -781,7 +765,7 @@
 
     .line 1511
     :cond_f
-    const v2, 0x1020064
+    const v2, 0xc020472
 
     const/16 v3, 0x8
 
@@ -1236,6 +1220,11 @@
 
 .method private makeContentView()Landroid/widget/RemoteViews;
     .locals 2
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2013.02.04: make notification to oppo\'s"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1539
@@ -1264,6 +1253,11 @@
 
 .method private makeTickerView()Landroid/widget/RemoteViews;
     .locals 2
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jiamiao.He@Plf.Keyguard, 2013.02.04: make notification to oppo\'s"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 1547

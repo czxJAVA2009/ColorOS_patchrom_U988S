@@ -13,6 +13,7 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/widget/TextView$4;,
+        Landroid/widget/TextView$EditToolBarActionListener;,
         Landroid/widget/TextView$ChangeWatcher;,
         Landroid/widget/TextView$Marquee;,
         Landroid/widget/TextView$CharWrapper;,
@@ -108,6 +109,14 @@
 .field private mDispatchTemporaryDetach:Z
 
 .field mDrawables:Landroid/widget/TextView$Drawables;
+
+.field private mEditToolBarActionListener:Landroid/widget/TextView$EditToolBarActionListener;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK,2013.10.07"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field private mEditableFactory:Landroid/text/Editable$Factory;
 
@@ -4950,21 +4959,23 @@
 
 .method private createEditorIfNeeded()V
     .locals 1
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK,2013.07.25: modify for creating OppoEditor instead of Editor"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    .line 8712
     iget-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
     if-nez v0, :cond_0
 
-    .line 8713
-    new-instance v0, Landroid/widget/Editor;
+    new-instance v0, Landroid/widget/OppoEditor;
 
-    invoke-direct {v0, p0}, Landroid/widget/Editor;-><init>(Landroid/widget/TextView;)V
+    invoke-direct {v0, p0}, Landroid/widget/OppoEditor;-><init>(Landroid/widget/TextView;)V
 
     iput-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
-    .line 8715
     :cond_0
     return-void
 .end method
@@ -6536,6 +6547,11 @@
     .parameter "shouldEllipsize"
     .parameter "effectiveEllipsize"
     .parameter "useSaved"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.08.16:Modify for OppoStaticLayout"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 6212
@@ -6794,12 +6810,10 @@
 
     goto/16 :goto_1
 
-    .line 6254
     :cond_8
     if-eqz p5, :cond_a
 
-    .line 6255
-    new-instance v1, Landroid/text/StaticLayout;
+    new-instance v1, Landroid/text/OppoStaticLayout;
 
     .end local v1           #result:Landroid/text/Layout;
     iget-object v2, p0, Landroid/widget/TextView;->mTransformed:Ljava/lang/CharSequence;
@@ -6839,7 +6853,7 @@
 
     move/from16 v13, p3
 
-    invoke-direct/range {v1 .. v14}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
+    invoke-direct/range {v1 .. v14}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
 
     .restart local v1       #result:Landroid/text/Layout;
     goto/16 :goto_1
@@ -6853,7 +6867,7 @@
     .line 6261
     .restart local v1       #result:Landroid/text/Layout;
     :cond_a
-    new-instance v1, Landroid/text/StaticLayout;
+    new-instance v1, Landroid/text/OppoStaticLayout;
 
     .end local v1           #result:Landroid/text/Layout;
     iget-object v2, p0, Landroid/widget/TextView;->mTransformed:Ljava/lang/CharSequence;
@@ -6872,17 +6886,15 @@
 
     move-object/from16 v5, p4
 
-    invoke-direct/range {v1 .. v9}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
+    invoke-direct/range {v1 .. v9}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
 
     .restart local v1       #result:Landroid/text/Layout;
     goto/16 :goto_1
 
-    .line 6265
     :cond_b
     if-eqz p5, :cond_d
 
-    .line 6266
-    new-instance v1, Landroid/text/StaticLayout;
+    new-instance v1, Landroid/text/OppoStaticLayout;
 
     .end local v1           #result:Landroid/text/Layout;
     iget-object v2, p0, Landroid/widget/TextView;->mTransformed:Ljava/lang/CharSequence;
@@ -6922,7 +6934,7 @@
 
     move/from16 v13, p3
 
-    invoke-direct/range {v1 .. v14}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
+    invoke-direct/range {v1 .. v14}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
 
     .restart local v1       #result:Landroid/text/Layout;
     goto/16 :goto_1
@@ -6936,7 +6948,7 @@
     .line 6272
     .restart local v1       #result:Landroid/text/Layout;
     :cond_d
-    new-instance v1, Landroid/text/StaticLayout;
+    new-instance v1, Landroid/text/OppoStaticLayout;
 
     .end local v1           #result:Landroid/text/Layout;
     iget-object v2, p0, Landroid/widget/TextView;->mTransformed:Ljava/lang/CharSequence;
@@ -6955,7 +6967,7 @@
 
     move-object/from16 v5, p4
 
-    invoke-direct/range {v1 .. v9}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
+    invoke-direct/range {v1 .. v9}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
 
     .restart local v1       #result:Landroid/text/Layout;
     goto/16 :goto_1
@@ -16948,6 +16960,11 @@
     .parameter "hintBoring"
     .parameter "ellipsisWidth"
     .parameter "bringIntoView"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.10.07:Modify for OppoStaticLayout"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     .line 6083
@@ -17615,12 +17632,10 @@
 
     goto/16 :goto_7
 
-    .line 6163
     :cond_15
     if-eqz v7, :cond_17
 
-    .line 6164
-    new-instance v16, Landroid/text/StaticLayout;
+    new-instance v16, Landroid/text/OppoStaticLayout;
 
     move-object/from16 v0, p0
 
@@ -17695,7 +17710,7 @@
 
     move/from16 v28, p5
 
-    invoke-direct/range {v16 .. v29}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
+    invoke-direct/range {v16 .. v29}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
 
     move-object/from16 v0, v16
 
@@ -17712,7 +17727,7 @@
 
     .line 6170
     :cond_17
-    new-instance v16, Landroid/text/StaticLayout;
+    new-instance v16, Landroid/text/OppoStaticLayout;
 
     move-object/from16 v0, p0
 
@@ -17754,7 +17769,7 @@
 
     move-object/from16 v20, v6
 
-    invoke-direct/range {v16 .. v24}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
+    invoke-direct/range {v16 .. v24}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
 
     move-object/from16 v0, v16
 
@@ -17764,12 +17779,10 @@
 
     goto/16 :goto_7
 
-    .line 6174
     :cond_18
     if-eqz v7, :cond_1a
 
-    .line 6175
-    new-instance v16, Landroid/text/StaticLayout;
+    new-instance v16, Landroid/text/OppoStaticLayout;
 
     move-object/from16 v0, p0
 
@@ -17844,7 +17857,7 @@
 
     move/from16 v28, p5
 
-    invoke-direct/range {v16 .. v29}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
+    invoke-direct/range {v16 .. v29}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;IILandroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZLandroid/text/TextUtils$TruncateAt;II)V
 
     move-object/from16 v0, v16
 
@@ -17861,7 +17874,7 @@
 
     .line 6181
     :cond_1a
-    new-instance v16, Landroid/text/StaticLayout;
+    new-instance v16, Landroid/text/OppoStaticLayout;
 
     move-object/from16 v0, p0
 
@@ -17903,7 +17916,7 @@
 
     move-object/from16 v20, v6
 
-    invoke-direct/range {v16 .. v24}, Landroid/text/StaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
+    invoke-direct/range {v16 .. v24}, Landroid/text/OppoStaticLayout;-><init>(Ljava/lang/CharSequence;Landroid/text/TextPaint;ILandroid/text/Layout$Alignment;Landroid/text/TextDirectionHeuristic;FFZ)V
 
     move-object/from16 v0, v16
 
@@ -22255,6 +22268,11 @@
 
 .method public onPreDraw()Z
     .locals 5
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK : Modify for reset the value of curs"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v2, 0x0
@@ -22311,6 +22329,10 @@
 
     .line 4791
     :cond_1
+    invoke-direct {p0, v1}, Landroid/widget/TextView;->reSetOppoCursValue(I)I
+
+    move-result v1
+
     if-gez v1, :cond_2
 
     iget v3, p0, Landroid/widget/TextView;->mGravity:I
@@ -23120,11 +23142,16 @@
 .method public onTouchEvent(Landroid/view/MotionEvent;)Z
     .locals 13
     .parameter "event"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK,2013.08.16 : Modify for OppoEditor"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    const/4 v8, 0x1
-
     const/4 v9, 0x0
+
+    const/4 v8, 0x1
 
     .line 7750
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getActionMasked()I
@@ -23135,19 +23162,25 @@
     .local v0, action:I
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
-    if-eqz v7, :cond_0
+    if-eqz v7, :cond_1
 
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
-    invoke-virtual {v7, p1}, Landroid/widget/Editor;->onTouchEvent(Landroid/view/MotionEvent;)V
+    invoke-virtual {v7, p1}, Landroid/widget/Editor;->onTouchEventWrap(Landroid/view/MotionEvent;)Z
 
-    .line 7754
+    move-result v7
+
+    if-eqz v7, :cond_1
+
     :cond_0
+    :goto_0
+    return v8
+
+    :cond_1
     invoke-super {p0, p1}, Landroid/view/View;->onTouchEvent(Landroid/view/MotionEvent;)Z
 
     move-result v4
 
-    .line 7761
     .local v4, superResult:Z
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
@@ -23161,21 +23194,16 @@
 
     if-ne v0, v8, :cond_2
 
-    .line 7762
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
     iput-boolean v9, v7, Landroid/widget/Editor;->mDiscardNextActionUp:Z
 
-    .line 7810
-    .end local v4           #superResult:Z
-    :cond_1
-    :goto_0
-    return v4
+    move v8, v4
 
-    .line 7766
-    .restart local v4       #superResult:Z
+    goto :goto_0
+
     :cond_2
-    if-ne v0, v8, :cond_b
+    if-ne v0, v8, :cond_c
 
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
@@ -23185,14 +23213,14 @@
 
     iget-boolean v7, v7, Landroid/widget/Editor;->mIgnoreActionUpEvent:Z
 
-    if-nez v7, :cond_b
+    if-nez v7, :cond_c
 
     :cond_3
     invoke-virtual {p0}, Landroid/widget/TextView;->isFocused()Z
 
     move-result v7
 
-    if-eqz v7, :cond_b
+    if-eqz v7, :cond_c
 
     move v6, v8
 
@@ -23207,24 +23235,24 @@
 
     move-result v7
 
-    if-eqz v7, :cond_1
+    if-eqz v7, :cond_b
 
     :cond_4
     invoke-virtual {p0}, Landroid/widget/TextView;->isEnabled()Z
 
     move-result v7
 
-    if-eqz v7, :cond_1
+    if-eqz v7, :cond_b
 
     iget-object v7, p0, Landroid/widget/TextView;->mText:Ljava/lang/CharSequence;
 
     instance-of v7, v7, Landroid/text/Spannable;
 
-    if-eqz v7, :cond_1
+    if-eqz v7, :cond_b
 
     iget-object v7, p0, Landroid/widget/TextView;->mLayout:Landroid/text/Layout;
 
-    if-eqz v7, :cond_1
+    if-eqz v7, :cond_b
 
     .line 7771
     const/4 v1, 0x0
@@ -23349,29 +23377,26 @@
     :cond_8
     or-int/2addr v1, v9
 
-    .line 7800
     :cond_9
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
     invoke-virtual {v7, p1}, Landroid/widget/Editor;->onTouchUpEvent(Landroid/view/MotionEvent;)V
 
-    .line 7802
     const/4 v1, 0x1
 
-    .line 7805
     .end local v2           #imm:Landroid/view/inputmethod/InputMethodManager;
     :cond_a
-    if-eqz v1, :cond_1
-
-    move v4, v8
-
-    .line 7806
-    goto/16 :goto_0
+    if-nez v1, :cond_0
 
     .end local v1           #handled:Z
     .end local v5           #textIsSelectable:Z
-    .end local v6           #touchIsFinished:Z
     :cond_b
+    move v8, v4
+
+    goto/16 :goto_0
+
+    .end local v6           #touchIsFinished:Z
+    :cond_c
     move v6, v9
 
     .line 7766
@@ -29408,4 +29433,182 @@
     .line 7050
     :cond_0
     return v0
+.end method
+
+.method private reSetOppoCursValue(I)I
+    .locals 2
+    .parameter "curs"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK : Add for reset the value of curs"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iget-object v1, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
+
+    instance-of v1, v1, Landroid/widget/OppoEditor;
+
+    if-eqz v1, :cond_0
+
+    iget-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
+
+    check-cast v0, Landroid/widget/OppoEditor;
+
+    .local v0, editor:Landroid/widget/OppoEditor;
+    if-eqz v0, :cond_0
+
+    iget-object v1, v0, Landroid/widget/OppoEditor;->mOppoSelectionCursorController:Landroid/widget/OppoCursorController;
+
+    if-eqz v1, :cond_0
+
+    iget-object v1, v0, Landroid/widget/OppoEditor;->mOppoSelectionCursorController:Landroid/widget/OppoCursorController;
+
+    invoke-virtual {v1}, Landroid/widget/OppoCursorController;->isSelectionStartDragged()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    invoke-virtual {p0}, Landroid/widget/TextView;->getSelectionStart()I
+
+    move-result p1
+
+    .end local v0           #editor:Landroid/widget/OppoEditor;
+    :cond_0
+    return p1
+.end method
+
+.method public isHandleEditAction(I)Z
+    .locals 2
+    .parameter "flag"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK,2013.10.07:monitor the behavior on the EditToolbar"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x1
+
+    iget-object v1, p0, Landroid/widget/TextView;->mEditToolBarActionListener:Landroid/widget/TextView$EditToolBarActionListener;
+
+    if-eqz v1, :cond_3
+
+    if-nez p1, :cond_1
+
+    iget-object v1, p0, Landroid/widget/TextView;->mEditToolBarActionListener:Landroid/widget/TextView$EditToolBarActionListener;
+
+    invoke-interface {v1}, Landroid/widget/TextView$EditToolBarActionListener;->onCopyButtonDown()V
+
+    :cond_0
+    :goto_0
+    return v0
+
+    :cond_1
+    if-ne p1, v0, :cond_2
+
+    iget-object v0, p0, Landroid/widget/TextView;->mEditToolBarActionListener:Landroid/widget/TextView$EditToolBarActionListener;
+
+    invoke-interface {v0}, Landroid/widget/TextView$EditToolBarActionListener;->onPasteButtonDown()Z
+
+    move-result v0
+
+    goto :goto_0
+
+    :cond_2
+    const/4 v1, 0x2
+
+    if-ne p1, v1, :cond_0
+
+    goto :goto_0
+
+    :cond_3
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method public setEditFlag(I)V
+    .locals 1
+    .parameter "flag"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.10.07: Add for monitor the touch behavior"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->QCOM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
+
+    instance-of v0, v0, Landroid/widget/OppoEditor;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
+
+    check-cast v0, Landroid/widget/OppoEditor;
+
+    invoke-virtual {v0, p1}, Landroid/widget/OppoEditor;->setEditFlag(I)V
+
+    :cond_0
+    return-void
+.end method
+
+.method public setEditToolBarActionListener(Landroid/widget/TextView$EditToolBarActionListener;)V
+    .locals 0
+    .parameter "listener"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhua.Lin@Plf.SDK,2013.10.07: monitor the behavior on the EditToolbar"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    iput-object p1, p0, Landroid/widget/TextView;->mEditToolBarActionListener:Landroid/widget/TextView$EditToolBarActionListener;
+
+    return-void
+.end method
+
+.method public setOnTouchListener(Landroid/view/View$OnTouchListener;)V
+    .locals 2
+    .parameter "l"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "JinPeng@Plf.SDK,2013.10.07: Add for know if TextView set OnTouchListener"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->QCOM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    invoke-super {p0, p1}, Landroid/view/View;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
+
+    iget-object v1, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
+
+    instance-of v1, v1, Landroid/widget/OppoEditor;
+
+    if-eqz v1, :cond_0
+
+    iget-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
+
+    check-cast v0, Landroid/widget/OppoEditor;
+
+    .local v0, editor:Landroid/widget/OppoEditor;
+    if-eqz p1, :cond_1
+
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Landroid/widget/OppoEditor;->setHasOnTouchListener(Z)V
+
+    .end local v0           #editor:Landroid/widget/OppoEditor;
+    :cond_0
+    :goto_0
+    return-void
+
+    .restart local v0       #editor:Landroid/widget/OppoEditor;
+    :cond_1
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Landroid/widget/OppoEditor;->setHasOnTouchListener(Z)V
+
+    goto :goto_0
 .end method

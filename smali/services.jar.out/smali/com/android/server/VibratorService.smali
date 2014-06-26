@@ -1270,73 +1270,51 @@
     .parameter "pattern"
     .parameter "repeat"
     .parameter "token"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jun.Zhang@Plf.Framework, not check permission here, check permission in OppoVibratorService!!"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
-    .line 203
-    iget-object v1, p0, Lcom/android/server/VibratorService;->mContext:Landroid/content/Context;
-
-    const-string v2, "android.permission.VIBRATE"
-
-    invoke-virtual {v1, v2}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I
-
-    move-result v1
-
-    if-eqz v1, :cond_0
-
-    .line 205
-    new-instance v1, Ljava/lang/SecurityException;
-
-    const-string v2, "Requires VIBRATE permission"
-
-    invoke-direct {v1, v2}, Ljava/lang/SecurityException;-><init>(Ljava/lang/String;)V
-
-    throw v1
-
-    .line 207
-    :cond_0
     invoke-static {}, Landroid/os/Binder;->getCallingUid()I
 
     move-result v5
 
-    .line 209
     .local v5, uid:I
     invoke-static {}, Landroid/os/Binder;->clearCallingIdentity()J
 
     move-result-wide v7
 
-    .line 221
     .local v7, identity:J
-    if-eqz p1, :cond_1
+    if-eqz p1, :cond_0
 
     :try_start_0
     array-length v1, p1
 
-    if-eqz v1, :cond_1
+    if-eqz v1, :cond_0
 
     invoke-direct {p0, p1}, Lcom/android/server/VibratorService;->isAll0([J)Z
 
     move-result v1
 
-    if-nez v1, :cond_1
+    if-nez v1, :cond_0
 
     array-length v1, p1
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    if-ge p2, v1, :cond_1
+    if-ge p2, v1, :cond_0
 
-    if-nez p3, :cond_2
+    if-nez p3, :cond_1
 
-    .line 249
-    :cond_1
+    :cond_0
     :goto_0
     invoke-static {v7, v8}, Landroid/os/Binder;->restoreCallingIdentity(J)V
 
-    .line 251
     return-void
 
-    .line 227
-    :cond_2
+    :cond_1
     :try_start_1
     new-instance v0, Lcom/android/server/VibratorService$Vibration;
 
@@ -1370,25 +1348,19 @@
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_1
 
-    .line 235
     :try_start_4
     invoke-direct {p0, p3}, Lcom/android/server/VibratorService;->removeVibrationLocked(Landroid/os/IBinder;)Lcom/android/server/VibratorService$Vibration;
 
-    .line 236
     invoke-direct {p0}, Lcom/android/server/VibratorService;->doCancelVibrateLocked()V
 
-    .line 237
-    if-ltz p2, :cond_3
+    if-ltz p2, :cond_2
 
-    .line 238
     iget-object v1, p0, Lcom/android/server/VibratorService;->mVibrations:Ljava/util/LinkedList;
 
     invoke-virtual {v1, v0}, Ljava/util/LinkedList;->addFirst(Ljava/lang/Object;)V
 
-    .line 239
     invoke-direct {p0}, Lcom/android/server/VibratorService;->startNextVibrationLocked()V
 
-    .line 246
     :goto_1
     monitor-exit v2
 
@@ -1423,13 +1395,11 @@
     .local v6, e:Landroid/os/RemoteException;
     goto :goto_0
 
-    .line 243
     .end local v6           #e:Landroid/os/RemoteException;
-    :cond_3
+    :cond_2
     :try_start_6
     iput-object v0, p0, Lcom/android/server/VibratorService;->mCurrentVibration:Lcom/android/server/VibratorService$Vibration;
 
-    .line 244
     invoke-direct {p0, v0}, Lcom/android/server/VibratorService;->startVibrationLocked(Lcom/android/server/VibratorService$Vibration;)V
     :try_end_6
     .catchall {:try_start_6 .. :try_end_6} :catchall_0

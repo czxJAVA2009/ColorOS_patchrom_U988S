@@ -21,7 +21,13 @@
 
 .field private mAnimationMode:I
 
-.field private mClose:Landroid/view/View;
+.field mClose:Landroid/view/View;
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_ACCESS:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2013.10.05: [-private]Modify for oppoStyle ActionBarTitle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field private mCurrentAnimation:Landroid/animation/Animator;
 

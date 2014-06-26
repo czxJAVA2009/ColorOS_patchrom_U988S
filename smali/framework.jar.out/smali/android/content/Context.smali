@@ -42,6 +42,14 @@
 
 .field public static final CLIPBOARD_SERVICE:Ljava/lang/String; = "clipboard"
 
+.field public static final CONNECTIVITY_OPPO_SERVICE:Ljava/lang/String; = "oppo_connectivity"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Congwei.Yan@Plf.CommSrv : Add for connectivity service of OPPO"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field public static final CONNECTIVITY_SERVICE:Ljava/lang/String; = "connectivity"
 
 .field public static final CONTEXT_IGNORE_SECURITY:I = 0x2
@@ -117,6 +125,14 @@
 .field public static final STATUS_BAR_SERVICE:Ljava/lang/String; = "statusbar"
 
 .field public static final STORAGE_SERVICE:Ljava/lang/String; = "storage"
+
+.field public static final TELEPHONY_OPPO_SERVICE:Ljava/lang/String; = "oppo_phone"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Congwei.Yan@Plf.CommSrv : Add for telephony service of OPPO"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
 
 .field public static final TELEPHONY_SERVICE:Ljava/lang/String; = "phone"
 
@@ -899,4 +915,38 @@
     const/4 v0, 0x0
 
     goto :goto_0
+.end method
+
+.method public isOppoStyle()Z
+    .locals 4
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianjun.Dan@Plf.SDK : add judged oppostyle"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
+
+    move-result-object v2
+
+    sget-object v3, Lcom/oppo/internal/R$styleable;->OppoTheme:[I
+
+    invoke-virtual {v2, v3}, Landroid/content/res/Resources$Theme;->obtainStyledAttributes([I)Landroid/content/res/TypedArray;
+
+    move-result-object v1
+
+    .local v1, typedArray:Landroid/content/res/TypedArray;
+    const/4 v2, 0x1
+
+    const/4 v3, 0x0
+
+    invoke-virtual {v1, v2, v3}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
+
+    move-result v0
+
+    .local v0, isOppoTheme:Z
+    invoke-virtual {v1}, Landroid/content/res/TypedArray;->recycle()V
+
+    return v0
 .end method

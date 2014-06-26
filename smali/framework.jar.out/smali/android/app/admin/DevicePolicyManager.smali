@@ -46,6 +46,14 @@
 
 .field public static final PASSWORD_QUALITY_UNSPECIFIED:I = 0x0
 
+.field public static final PASSWORD_QUALITY_VOICE_WEAK:I = 0x4000
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_FIELD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "MTK FIELD"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+.end field
+
 .field public static final RESET_PASSWORD_REQUIRE_ENTRY:I = 0x1
 
 .field private static TAG:Ljava/lang/String; = null

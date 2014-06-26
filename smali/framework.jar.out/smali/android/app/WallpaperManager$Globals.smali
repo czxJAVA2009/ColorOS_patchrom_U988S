@@ -305,6 +305,11 @@
 .method private getCurrentWallpaperLocked(Landroid/content/Context;)Landroid/graphics/Bitmap;
     .locals 10
     .parameter "context"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_RESOURCE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "gaoliang@Plf.Keyguard,2012.08.27:add to change the default wallpaper res"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->ROM:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
 
     .prologue
     const/4 v8, 0x0

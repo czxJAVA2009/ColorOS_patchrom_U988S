@@ -238,3 +238,17 @@
     .line 65
     return-void
 .end method
+
+.method public dispatchPositionChanged(II)V
+    .locals 0
+    .parameter "left"
+    .parameter "top"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "Jianhui.Yu@Plf.SDK,2012.09.19: Add for position changed"
+        property = .enum Landroid/annotation/OppoHook$OppoRomType;->MTK:Landroid/annotation/OppoHook$OppoRomType;
+    .end annotation
+
+    .prologue
+    return-void
+.end method

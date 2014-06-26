@@ -3557,11 +3557,23 @@
     .locals 5
     .parameter "doAnimation"
     .parameter "requestAnim"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangkai add for apklock"
+    .end annotation
 
     .prologue
     const/4 v2, 0x1
 
     const/4 v1, 0x0
+
+    iget-object v3, p0, Lcom/android/server/wm/WindowState;->mAttrs:Landroid/view/WindowManager$LayoutParams;
+
+    iget-object v4, p0, Lcom/android/server/wm/WindowState;->mChildWindows:Ljava/util/ArrayList;
+
+    invoke-static {v3, v4, p1, p2}, Lcom/android/server/wm/OppoWindowStateHelper;->hideLwExtr(Landroid/view/WindowManager$LayoutParams;Ljava/util/ArrayList;ZZ)Z
+
+    move-result p2
 
     .line 1004
     if-eqz p1, :cond_0
@@ -5194,6 +5206,10 @@
     .locals 4
     .parameter "doAnimation"
     .parameter "requestAnim"
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->CHANGE_CODE:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangkai add for apklock"
+    .end annotation
 
     .prologue
     const/4 v0, 0x0
@@ -5285,11 +5301,17 @@
 
     if-nez v2, :cond_0
 
-    .line 975
     :cond_2
+    iget-object v0, p0, Lcom/android/server/wm/WindowState;->mAttrs:Landroid/view/WindowManager$LayoutParams;
+
+    iget-object v2, p0, Lcom/android/server/wm/WindowState;->mChildWindows:Ljava/util/ArrayList;
+
+    invoke-static {v0, v2, p1, p2}, Lcom/android/server/wm/OppoWindowStateHelper;->showLwExtr(Landroid/view/WindowManager$LayoutParams;Ljava/util/ArrayList;ZZ)Z
+
+    move-result p2
+
     if-eqz p1, :cond_3
 
-    .line 978
     iget-object v0, p0, Lcom/android/server/wm/WindowState;->mService:Lcom/android/server/wm/WindowManagerService;
 
     invoke-virtual {v0}, Lcom/android/server/wm/WindowManagerService;->okToDisplay()Z
@@ -5473,4 +5495,28 @@
     const-string v0, "}"
 
     goto :goto_0
+.end method
+
+.method public bridge synthetic getAttachedWindow()Landroid/view/WindowManagerPolicy$WindowState;
+    .locals 1
+
+    .prologue
+    invoke-virtual {p0}, Lcom/android/server/wm/WindowState;->getAttachedWindow()Lcom/android/server/wm/WindowState;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getAttachedWindow()Lcom/android/server/wm/WindowState;
+    .locals 1
+    .annotation build Landroid/annotation/OppoHook;
+        level = .enum Landroid/annotation/OppoHook$OppoHookType;->NEW_METHOD:Landroid/annotation/OppoHook$OppoHookType;
+        note = "zhangkai add for apklock"
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/wm/WindowState;->mAttachedWindow:Lcom/android/server/wm/WindowState;
+
+    return-object v0
 .end method
