@@ -29,9 +29,9 @@
 
 .field private static final ENABLE_INSECURE_STATUS_BAR_EXPAND:Z = true
 
-.field private static final GLASS_UNLOCK_PROCESS:Ljava/lang/String; = "com.oppo.LockScreenGlassBoard"
+.field private static final GLASS_UNLOCK_PROCESS:Ljava/lang/String; = "com.oppo.orignalunlock.jbtwo"
 
-.field private static final GLASS_UNLOCK_SERVICE:Ljava/lang/String; = "com.oppo.LockScreenGlassBoard.OppoLockScreenGlassBoard"
+.field private static final GLASS_UNLOCK_SERVICE:Ljava/lang/String; = "com.oppo.orignalunlock.jbtwo.service.OppoOrignalUnlockService"
 
 .field private static final HANDLE_SET_APK_SHOWING:I = 0x10
 
@@ -2252,7 +2252,7 @@
 
     const-string v2, "oppo_unlock_change_pkg"
 
-    const-string v3, "com.oppo.LockScreenGlassBoard.OppoLockScreenGlassBoard"
+    const-string v3, "com.oppo.orignalunlock.jbtwo.service.OppoOrignalUnlockService"
 
     invoke-static {v1, v2, v3}, Landroid/provider/Settings$System;->putString(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)Z
 
@@ -2264,7 +2264,7 @@
 
     const-string v2, "oppo_unlock_change_process"
 
-    const-string v3, "com.oppo.LockScreenGlassBoard"
+    const-string v3, "com.oppo.orignalunlock.jbtwo"
 
     invoke-static {v1, v2, v3}, Landroid/provider/Settings$System;->putString(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)Z
 
