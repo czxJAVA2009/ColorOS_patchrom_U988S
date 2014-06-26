@@ -96,11 +96,6 @@
     .line 1593
     iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
 
-    #getter for: Lcom/android/internal/widget/ActionBarView;->mUpGoerFive:Landroid/view/ViewGroup;
-    invoke-static {v0}, Lcom/android/internal/widget/ActionBarView;->access$700(Lcom/android/internal/widget/ActionBarView;)Landroid/view/ViewGroup;
-
-    move-result-object v0
-
     iget-object v1, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
 
     #getter for: Lcom/android/internal/widget/ActionBarView;->mExpandedHomeLayout:Lcom/android/internal/widget/ActionBarView$HomeView;
@@ -108,7 +103,7 @@
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Landroid/view/ViewGroup;->removeView(Landroid/view/View;)V
+    invoke-virtual {v0, v1}, Lcom/android/internal/widget/ActionBarView;->removeView(Landroid/view/View;)V
 
     .line 1594
     iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
@@ -275,18 +270,6 @@
     .line 1616
     iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
 
-    iget-object v1, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
-
-    #getter for: Lcom/android/internal/widget/ActionBarView;->mWasHomeEnabled:Z
-    invoke-static {v1}, Lcom/android/internal/widget/ActionBarView;->access$1700(Lcom/android/internal/widget/ActionBarView;)Z
-
-    move-result v1
-
-    invoke-virtual {v0, v1}, Lcom/android/internal/widget/ActionBarView;->setHomeButtonEnabled(Z)V
-
-    .line 1617
-    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
-
     invoke-virtual {v0}, Lcom/android/internal/widget/ActionBarView;->requestLayout()V
 
     .line 1618
@@ -307,14 +290,12 @@
 .end method
 
 .method public expandItemActionView(Lcom/android/internal/view/menu/MenuBuilder;Lcom/android/internal/view/menu/MenuItemImpl;)Z
-    .locals 6
+    .locals 5
     .parameter "menu"
     .parameter "item"
 
     .prologue
-    const/4 v5, 0x1
-
-    const/4 v4, 0x0
+    const/4 v4, 0x1
 
     const/16 v3, 0x8
 
@@ -398,20 +379,10 @@
 
     iget-object v1, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
 
-    #getter for: Lcom/android/internal/widget/ActionBarView;->mUpGoerFive:Landroid/view/ViewGroup;
-    invoke-static {v1}, Lcom/android/internal/widget/ActionBarView;->access$700(Lcom/android/internal/widget/ActionBarView;)Landroid/view/ViewGroup;
-
-    move-result-object v1
-
     if-eq v0, v1, :cond_1
 
     .line 1566
     iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
-
-    #getter for: Lcom/android/internal/widget/ActionBarView;->mUpGoerFive:Landroid/view/ViewGroup;
-    invoke-static {v0}, Lcom/android/internal/widget/ActionBarView;->access$700(Lcom/android/internal/widget/ActionBarView;)Landroid/view/ViewGroup;
-
-    move-result-object v0
 
     iget-object v1, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
 
@@ -420,7 +391,7 @@
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Landroid/view/ViewGroup;->addView(Landroid/view/View;)V
+    invoke-virtual {v0, v1}, Lcom/android/internal/widget/ActionBarView;->addView(Landroid/view/View;)V
 
     .line 1568
     :cond_1
@@ -510,16 +481,9 @@
     :cond_5
     iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
 
-    #calls: Lcom/android/internal/widget/ActionBarView;->setHomeButtonEnabled(ZZ)V
-    invoke-static {v0, v4, v4}, Lcom/android/internal/widget/ActionBarView;->access$1300(Lcom/android/internal/widget/ActionBarView;ZZ)V
-
-    .line 1574
-    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
-
     invoke-virtual {v0}, Lcom/android/internal/widget/ActionBarView;->requestLayout()V
 
-    .line 1575
-    invoke-virtual {p2, v5}, Lcom/android/internal/view/menu/MenuItemImpl;->setActionViewExpanded(Z)V
+    invoke-virtual {p2, v4}, Lcom/android/internal/view/menu/MenuItemImpl;->setActionViewExpanded(Z)V
 
     .line 1577
     iget-object v0, p0, Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;->this$0:Lcom/android/internal/widget/ActionBarView;
@@ -541,7 +505,7 @@
 
     .line 1581
     :cond_6
-    return v5
+    return v4
 .end method
 
 .method public flagActionItems()Z
